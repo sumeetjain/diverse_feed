@@ -12,3 +12,10 @@ Then I `cd`'d into the project folder and ran `git init`, created this very file
 
 ---
 
+Then I set Puma as the web server, instead of the default Webrick. This is because Heroku recommends it: <https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server>
+
+---
+
+I ran into a slight issue because my Ruby version was 2.4, but Rails 4.2 doesn't support that new of a Ruby. So I switched Ruby back to 2.3, which solved my problems. I added a **.ruby-version** file, so everyone else will know what version of Ruby this application expects you to run.
+
+---
