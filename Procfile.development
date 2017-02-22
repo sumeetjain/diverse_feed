@@ -1,1 +1,0 @@
-web: tail -f log/${RACK_ENV}.log

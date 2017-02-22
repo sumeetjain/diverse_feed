@@ -19,3 +19,9 @@ Then I set Puma as the web server, instead of the default Webrick. This is becau
 I ran into a slight issue because my Ruby version was 2.4, but Rails 4.2 doesn't support that new of a Ruby. So I switched Ruby back to 2.3, which solved my problems. I added a **.ruby-version** file, so everyone else will know what version of Ruby this application expects you to run.
 
 ---
+
+The next thing I did was check that Puma and Foreman play nicely with Pry. I depend on Pry a lot, and I don't want to delay making my application's groundwork compatible with it.
+
+Foreman is inherently incompatible with Pry, however. So I figured out the best (in my opinion) workaround and wrote up a bit about how devs should run the application locally. That writeup is in the main [README.md](./README.md) file.
+
+---
