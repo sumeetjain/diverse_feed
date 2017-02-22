@@ -25,3 +25,5 @@ The next thing I did was check that Puma and Foreman play nicely with Pry. I dep
 Foreman is inherently incompatible with Pry, however. So I figured out the best (in my opinion) workaround and wrote up a bit about how devs should run the application locally. That writeup is in the main [README.md](./README.md) file.
 
 ---
+
+The next thing I set up was rspec, for testing, since I'd removed TestUnit before.
