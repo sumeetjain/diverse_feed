@@ -11,6 +11,10 @@ bin/setup
 gem install foreman
 ```
 
+### Services
+
+Go to <https://apps.twitter.com/app/new> and create a new app on Twitter. Set `http://127.0.0.1:3000/auth/twitter/callback` as the callback URL.
+
 ## Running
 
 To run the app, you can run `rails s`, as usual.
