@@ -65,4 +65,40 @@ RSpec.describe DemographicMapper, type: :model do
       })
     end
   end
+
+  context "for non-round values" do
+    before(:example) do
+      friends_info = {
+        race: {
+          1 => ["White", "Mexican"],
+          3 => ["Black"],
+          4 => ["Indian", "Mexican", "Latino"]
+        },
+        income: {
+          1 => 20000,
+          2 => 60000,
+          3 => 60000
+        }
+      }
+
+      @mapper = DemographicMapper.new(friends_info)
+    end
+
+    it 'builds map for race' do
+      expect(@mapper.race).to include({
+        "White"  => 16.67,
+        "Mexican" => 33.33,
+        "Indian" => 16.67,
+        "Black"  => 16.67,
+        "Latino" => 16.67
+      })
+    end
+
+    it 'builds map for income' do
+      expect(@mapper.income).to include({
+        20000  => 33.33,
+        60000 => 66.67
+      })
+    end
+  end
 end
