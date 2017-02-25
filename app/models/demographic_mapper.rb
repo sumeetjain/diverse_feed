@@ -14,15 +14,15 @@ class DemographicMapper
   def map_race
     @race = Hash.new(0)
 
-    @friends_info.each do |user_id, values|
-      values.each { |value| @race[value] += share_amount }
+    @friends_info[:race].each do |user_id, values|
+      values.each { |value| @race[value] += share_amount(:race) }
     end
 
     @race
   end
 
   # Returns Float proportion each demographic value adds to the tally.
-  def share_amount
-    @share_amount ||= (100.0 / @friends_info.values.flatten.length)
+  def share_amount(key)
+    @share_amount ||= (100.0 / @friends_info[key].values.flatten.length)
   end
 end

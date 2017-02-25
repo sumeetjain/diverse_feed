@@ -5,10 +5,12 @@ RSpec.describe DemographicMapper, type: :model do
     it 'maps one race per friend' do
       # User IDs and their corresponding race info.
       friends_info = {
-        1 => ["White"],
-        2 => ["White"],
-        3 => ["Black"],
-        4 => ["Indian"]
+        race: {
+          1 => ["White"],
+          2 => ["White"],
+          3 => ["Black"],
+          4 => ["Indian"]
+        }
       }
 
       mapper = DemographicMapper.new(friends_info)
@@ -23,10 +25,12 @@ RSpec.describe DemographicMapper, type: :model do
     it 'maps multiple races per friend' do
       # User IDs and their corresponding race info.
       friends_info = {
-        1 => ["White", "Mexican"],
-        2 => ["White", "Indian", "Black", "Chinese"],
-        3 => ["Black"],
-        4 => ["Indian", "Mexican", "Latino"]
+        race: {
+          1 => ["White", "Mexican"],
+          2 => ["White", "Indian", "Black", "Chinese"],
+          3 => ["Black"],
+          4 => ["Indian", "Mexican", "Latino"]
+        }
       }
 
       mapper = DemographicMapper.new(friends_info)
