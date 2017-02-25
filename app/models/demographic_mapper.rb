@@ -1,9 +1,10 @@
 class DemographicMapper
-  attr_reader :friends_info, :race
+  attr_reader :friends_info, :race, :income
 
   def initialize(friends_info)
     @friends_info = friends_info
     @race = map_race
+    @income = map_income
   end
 
   private
@@ -19,6 +20,19 @@ class DemographicMapper
     end
 
     @race
+  end
+
+  # Count proportions of each particular 'income' value in friends_info.
+  # 
+  # Returns Hash of values and percentage of that value's makeup.
+  def map_income
+    @income = Hash.new(0)
+    
+    @friends_info[:income].each do |user_id, value|
+      @income[value] += share_amount(:income)
+    end
+
+    @income
   end
 
   # Returns Float proportion each demographic value adds to the tally.

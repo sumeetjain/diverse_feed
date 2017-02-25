@@ -47,7 +47,8 @@ RSpec.describe DemographicMapper, type: :model do
           2 => ["White", "Indian", "Black", "Chinese"],
           3 => ["Black"],
           4 => ["Indian", "Mexican", "Latino"]
-        }
+        },
+        income: {}
       }
 
       @mapper = DemographicMapper.new(friends_info)
