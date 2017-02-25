@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: reports
+#
+#  id                      :integer          not null, primary key
+#  subject                 :string
+#  friends_count           :integer
+#  friends_in_report_count :integer
+#  demographics            :text
+#  user_id                 :integer
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#
+
 require 'rails_helper'
 
 RSpec.describe Report, type: :model do
