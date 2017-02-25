@@ -9,6 +9,12 @@ RSpec.describe DemographicMapper, type: :model do
           2 => ["White"],
           3 => ["Black"],
           4 => ["Indian"]
+        },
+        income: {
+          1 => 20000,
+          2 => 45000,
+          3 => 60000,
+          4 => 65000
         }
       }
 
@@ -20,6 +26,15 @@ RSpec.describe DemographicMapper, type: :model do
         "White"  => 50.0,
         "Black"  => 25.0,
         "Indian" => 25.0
+      })
+    end
+
+    it 'builds map for income' do
+      expect(@mapper.income).to include({
+        20000  => 25.0,
+        45000  => 25.0,
+        60000 => 25.0,
+        65000 => 25.0
       })
     end
   end
