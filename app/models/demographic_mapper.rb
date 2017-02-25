@@ -27,7 +27,7 @@ class DemographicMapper
   # Returns Hash of values and percentage of that value's makeup.
   def map_income
     @income = Hash.new(0)
-    
+
     @friends_info[:income].each do |user_id, value|
       @income[value] += share_amount(:income)
     end
@@ -37,7 +37,7 @@ class DemographicMapper
 
   # Returns Float proportion each demographic value adds to the tally.
   def share_amount(key)
-    @share_amount ||= (100.0 / total_values(@friends_info[key]))
+    @share_amount ||= (100.0 / total_values(@friends_info[key])).round(2)
   end
 
   # Counts how many values there are for a given part of friends_info.
