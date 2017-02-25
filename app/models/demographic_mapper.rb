@@ -23,6 +23,6 @@ class DemographicMapper
 
   # Returns Float proportion each demographic value adds to the tally.
   def share_amount
-    @share_amount ||= (100.0 / @friends_info.length)
+    @share_amount ||= (100.0 / @friends_info.values.flatten.length)
   end
 end
