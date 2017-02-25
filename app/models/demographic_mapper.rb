@@ -8,7 +8,7 @@ class DemographicMapper
 
   private
 
-  # Count proportions of each particular 'race' value in @friends_info.
+  # Count proportions of each particular 'race' value in friends_info.
   # 
   # Returns Hash of values and percentage of that value's makeup.
   def map_race
@@ -23,6 +23,15 @@ class DemographicMapper
 
   # Returns Float proportion each demographic value adds to the tally.
   def share_amount(key)
-    @share_amount ||= (100.0 / @friends_info[key].values.flatten.length)
+    @share_amount ||= (100.0 / total_values(@friends_info[key]))
+  end
+
+  # Counts how many values there are for a given part of friends_info.
+  # 
+  # data - Hash containing a subset of friends_info (e.g. 'race')
+  # 
+  # Returns Integer.
+  def total_values(data)
+    data.values.flatten.length
   end
 end
