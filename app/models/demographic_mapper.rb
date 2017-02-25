@@ -14,12 +14,14 @@ class DemographicMapper
   def map_race
     @race = Hash.new(0)
 
-    share = 100.0 / @friends_info.length
-
     @friends_info.each do |user_id, values|
-      values.each { |value| @race[value] += share }
+      values.each { |value| @race[value] += share_amount }
     end
 
     @race
+  end
+
+  def share_amount
+    @share_amount ||= (100.0 / @friends_info.length)
   end
 end
