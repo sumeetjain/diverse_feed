@@ -37,6 +37,9 @@ group :development, :test do
 
   gem 'rspec-rails'
   gem "capybara"
+
+  # Fixes a bug in Thor that causes a warning when running Rails CLI commands.
+  gem "thor", "0.19.1"
 end
 
 group :development do
