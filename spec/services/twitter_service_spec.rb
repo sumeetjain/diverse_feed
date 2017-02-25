@@ -7,7 +7,7 @@ RSpec.describe TwitterService, type: :service do
       allow(asker).to receive(:twitter_key)
       allow(asker).to receive(:twitter_secret)
 
-      service = TwitterService.new(asker)
+      service = TwitterService.new(asker: asker, client: FakeTwitter.new)
 
       expect(service.subject_friend_ids("hul")).to include(1)
     end
