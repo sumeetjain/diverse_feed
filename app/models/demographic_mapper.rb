@@ -35,13 +35,22 @@ class DemographicMapper
     @income
   end
 
-  # Returns Float proportion each demographic value adds to the tally.
+  # Returns Hash containing each key's share_amount.
   def share_amounts
     share_amounts_arr = @friends_info.map do |key, values_hash|
-      [key, (100.0 / total_values(@friends_info[key])).round(2)]
+      [key, share_amount(key)]
     end
 
     @share_amounts ||= share_amounts_arr.to_h
+  end
+
+  # Proportion each demographic value adds to its key's tally.
+  # 
+  # key - Symbol for demographic key (e.g. `:race`)
+  # 
+  # Returns Float.
+  def share_amount(key)
+    (100.0 / total_values(@friends_info[key])).round(2)
   end
 
   # Counts how many values there are for a given part of friends_info.
