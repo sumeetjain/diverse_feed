@@ -1,9 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe DemographicMapper, type: :model do
-  describe '#race' do
-    it 'maps one race per friend' do
-      # User IDs and their corresponding race info.
+  context "for one value per key" do
+    before(:example) do
       friends_info = {
         race: {
           1 => ["White"],
@@ -13,17 +12,20 @@ RSpec.describe DemographicMapper, type: :model do
         }
       }
 
-      mapper = DemographicMapper.new(friends_info)
+      @mapper = DemographicMapper.new(friends_info)
+    end
 
-      expect(mapper.race).to include({
+    it 'builds map for race' do
+      expect(@mapper.race).to include({
         "White"  => 50.0,
         "Black"  => 25.0,
         "Indian" => 25.0
       })
     end
+  end
 
-    it 'maps multiple races per friend' do
-      # User IDs and their corresponding race info.
+  context "for multiple values per key" do
+    before(:example) do
       friends_info = {
         race: {
           1 => ["White", "Mexican"],
@@ -33,9 +35,11 @@ RSpec.describe DemographicMapper, type: :model do
         }
       }
 
-      mapper = DemographicMapper.new(friends_info)
+      @mapper = DemographicMapper.new(friends_info)
+    end
 
-      expect(mapper.race).to include({
+    it 'builds map for race' do
+      expect(@mapper.race).to include({
         "White"  => 20.0,
         "Mexican" => 20.0,
         "Indian" => 20.0,
