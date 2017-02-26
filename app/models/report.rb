@@ -14,7 +14,22 @@
 #
 
 class Report < ActiveRecord::Base
+  attr_writer :twitter_service
+
   belongs_to :asker, class_name: "User", foreign_key: "user_id"
 
   serialize :demographics, Hash
+
+  # def twitter_id
+  #   @twitter_id ||= 
+  # end
+
+  def generate
+  end
+
+  private
+
+  def twitter_service
+    @twitter_service ||= TwitterService.new(asker)
+  end
 end

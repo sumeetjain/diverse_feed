@@ -18,7 +18,7 @@ require 'rails_helper'
 RSpec.describe Report, type: :model do
   describe '#generate' do
     before :example do
-      @report = Report.new(subject: "hul", twitter_client: FakeTwitter.new)
+      @report = Report.new(subject: "hul", twitter_service: FakeTwitter.new)
       @report.generate
     end
 
