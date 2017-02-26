@@ -10,6 +10,7 @@
 #  user_id                 :integer
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
+#  twitter_id              :integer
 #
 
 class Report < ActiveRecord::Base
