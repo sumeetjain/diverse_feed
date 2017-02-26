@@ -15,6 +15,7 @@
 class Report < ActiveRecord::Base
   belongs_to :asker, class_name: "User", foreign_key: "user_id"
 
+  # TODO: Extract to DemographicCollector?
   def self.collect_demographics(ids)
     sql = "SELECT * FROM crosstab('SELECT id, key, value FROM demographics WHERE user_id IN (#{ids.join(",")}) ORDER BY 1', $$VALUES (1), (2)$$) AS (id int, race varchar, income varchar);"
     info = self.connection.select_all(sql).entries
