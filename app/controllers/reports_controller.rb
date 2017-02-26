@@ -1,14 +1,14 @@
 class ReportsController < ApplicationController
   def show
-    @report = Report.find(:id)
+    @report = Report.find(params[:id])
   end
 
   def new
-    @report = Report.new
+    @report = current_user.reports.build
   end
 
   def create
-    @report = Report.new(params[:report])
+    @report = current_user.reports.build(report_params)
 
     if @report.save
       redirect_to @report, notice: "Report generated!"
@@ -16,5 +16,11 @@ class ReportsController < ApplicationController
       flash.now[:alert] = "There was a problem."
       render :new
     end
+  end
+
+  private
+
+  def report_params
+    params.require(:report).permit(:subject)
   end
 end
