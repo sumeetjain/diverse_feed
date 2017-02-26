@@ -1,3 +1,9 @@
+# DemographicMapper takes in a collection of demographic info (probably from
+# DemographicCollector) and builds frequency maps for each demographic
+# category. These maps should be pretty easy to pass off to a graphing library
+# for creating pie charts or some other visual graphic showing what percentage
+# of a person's friends are of a given demographic value.
+
 class DemographicMapper
   attr_reader :friends_info, :race, :income
 
