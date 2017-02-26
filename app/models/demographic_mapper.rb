@@ -13,6 +13,13 @@ class DemographicMapper
     @income = map_income
   end
 
+  def to_hash
+    {
+      race:   map_race,
+      income: map_income
+    }
+  end
+
   private
 
   # Count proportions of each particular 'race' value in friends_info.
