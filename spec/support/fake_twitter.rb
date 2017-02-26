@@ -9,4 +9,8 @@ class FakeTwitter
     attrs = {ids: [1, 2, 3]}
     OpenStruct.new(attrs: attrs)
   end
+
+  def user(subject)
+    OpenStruct.new(id: 10)
+  end
 end

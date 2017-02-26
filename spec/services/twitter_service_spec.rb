@@ -10,4 +10,14 @@ RSpec.describe TwitterService, type: :service do
       expect(twitter.subject_friend_ids("hul")).to include(1)
     end
   end
+
+  describe '#user_id' do
+    it "gets an account's Twitter ID" do
+      asker = double(:asker, twitter_key: "key", twitter_secret: "secret")
+
+      twitter = TwitterService.new(asker: asker, client: FakeTwitter.new)
+
+      expect(twitter.user_id("hul")).to eq(10)
+    end
+  end
 end
