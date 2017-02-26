@@ -1,0 +1,7 @@
+<p>Diversity Report for: <%= @report.subject %></p>
+
+<% @report.demographics.each do |key, value| %>
+  <h1><%= key %></h1>
+
+  <%= value.to_s %>
+<% end %>
