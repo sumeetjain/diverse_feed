@@ -21,15 +21,17 @@ class Report < ActiveRecord::Base
   serialize :demographics, Hash
 
   def generate
-    self.twitter_id    = twitter_service.user_id(subject)
-    self.friends_count = twitter_service.friends_count(subject)
-    self.friends_in_report_count = friend_user_ids.length
-
     demographics = DemographicCollector.new(friend_user_ids)
     frequency_map = DemographicMapper.new(demographics.info)
     self.demographics = frequency_map.to_hash
+  end
 
-    # self.friends_in_report_count = friend_user_ids.length
+  def friends_count
+    @friends_count ||= twitter_service.friends_count(subject)
+  end
+
+  def friends_in_report_count
+    @friends_in_report_count ||= friend_user_ids.length
   end
 
   private
@@ -38,6 +40,10 @@ class Report < ActiveRecord::Base
 
   def twitter_service
     @twitter_service ||= TwitterService.new(asker: asker, client: @twitter_client)
+  end
+
+  def twitter_id
+    @twitter_id ||= twitter_service.user_id(subject)
   end
 
   def friend_twitter_ids

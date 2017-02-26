@@ -46,12 +46,8 @@ RSpec.describe Report, type: :model do
 
       user_ids = [user1, user2, user3, user4].map { |u| u.id }
       @report.stub(:friend_user_ids) { user_ids }
-      
-      @report.generate
-    end
 
-    it "sets twitter_id" do
-      expect(@report.twitter_id).to eq(10)
+      @report.generate
     end
 
     it "sets friends_count" do
