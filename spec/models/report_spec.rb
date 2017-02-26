@@ -18,35 +18,31 @@ require 'rails_helper'
 RSpec.describe Report, type: :model do
   context 'with data for four users' do
     before :example do
-      user1 = User.create
+      user1 = User.create(twitter_id: 1)
       user1.demographics.create([
         {key: 1, value: "White"},
         {key: 2, value: 20000}
       ])
 
-      user2 = User.create
+      user2 = User.create(twitter_id: 2)
       user2.demographics.create([
         {key: 1, value: "White"},
         {key: 2, value: 45000}
       ])
 
-      user3 = User.create
+      user3 = User.create(twitter_id: 3)
       user3.demographics.create([
         {key: 1, value: "Black"},
         {key: 2, value: 60000}
       ])
 
-      user4 = User.create
+      user4 = User.create(twitter_id: 4)
       user4.demographics.create([
         {key: 1, value: "Indian"},
         {key: 2, value: 65000}
       ])
 
       @report = Report.new(subject: "hul", twitter_client: FakeTwitter.new)
-
-      user_ids = [user1, user2, user3, user4].map { |u| u.id }
-      @report.stub(:friend_user_ids) { user_ids }
-
       @report.generate
     end
 

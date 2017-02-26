@@ -56,7 +56,10 @@ class Report < ActiveRecord::Base
     @friend_twitter_ids ||= twitter_service.subject_friend_ids(subject)
   end
 
+  # Returns Array of subject's friends' local IDs.
   def friend_user_ids
-    @friend_user_ids ||= User.where(twitter_id: friend_twitter_ids)
+    @friend_user_ids ||= User.select(:id)
+      .where(twitter_id: friend_twitter_ids)
+      .pluck(:id)
   end
 end
