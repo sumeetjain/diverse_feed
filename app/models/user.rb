@@ -41,6 +41,6 @@ class User < ActiveRecord::Base
       twitter_key: auth_hash[:credentials][:token],
       twitter_secret: auth_hash[:credentials][:secret]
     )
-    user.save
+    user.save and user
   end
 end
