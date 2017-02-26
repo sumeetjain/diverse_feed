@@ -28,6 +28,11 @@ class User < ActiveRecord::Base
     find_by_twitter_id(auth_hash[:uid]) || create_from_twitter(auth_hash)
   end
 
+  # Returns the user's demographic Profile.
+  def profile
+    Profile.new(user: self)
+  end
+
   private
 
   # Create a new user from Twitter's OAuth flow.
