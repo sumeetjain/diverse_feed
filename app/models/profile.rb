@@ -3,7 +3,6 @@ class Profile
   include ActiveRecord::AttributeAssignment
 
   attr_accessor :user
-  attr_writer :income
 
   def save
     user.demographics.destroy_all
