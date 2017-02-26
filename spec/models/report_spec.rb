@@ -16,7 +16,7 @@
 require 'rails_helper'
 
 RSpec.describe Report, type: :model do
-  describe '#generate' do
+  context 'with data for four users' do
     before :example do
       user1 = User.create
       user1.demographics.create([
@@ -50,29 +50,35 @@ RSpec.describe Report, type: :model do
       @report.generate
     end
 
-    it "sets friends_count" do
-      expect(@report.friends_count).to eq(5)
+    describe '#friends_count' do
+      it "counts the report subject's friends" do
+        expect(@report.friends_count).to eq(5)
+      end
     end
 
-    it "sets friends_in_report_count" do
-      expect(@report.friends_in_report_count).to eq(4)
+    describe '#friends_in_report_count' do
+      it "counts the report subject's friends with demographic data" do
+        expect(@report.friends_in_report_count).to eq(4)
+      end
     end
 
-    it "sets demographics, race" do
-      expect(@report.demographics[:race]).to include({
-        "White"  => 50.0,
-        "Black"  => 25.0,
-        "Indian" => 25.0
-      })
-    end
+    describe '#generate' do
+      it "sets demographics, race" do
+        expect(@report.demographics[:race]).to include({
+          "White"  => 50.0,
+          "Black"  => 25.0,
+          "Indian" => 25.0
+        })
+      end
 
-    it "sets demographics, income" do
-      expect(@report.demographics[:income]).to include({
-        20000 => 25.0,
-        45000 => 25.0,
-        60000 => 25.0,
-        65000 => 25.0
-      })
+      it "sets demographics, income" do
+        expect(@report.demographics[:income]).to include({
+          20000 => 25.0,
+          45000 => 25.0,
+          60000 => 25.0,
+          65000 => 25.0
+        })
+      end
     end
   end
 
