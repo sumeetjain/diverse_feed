@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe DemographicMapper, type: :model do
+RSpec.describe DemographicMapper, type: :service do
   context "for one value per key" do
     before(:example) do
       friends_info = {

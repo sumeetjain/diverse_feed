@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe DemographicCollector, type: :model do
+RSpec.describe DemographicCollector, type: :service do
   describe '#data' do
     it "gets data for a set of users" do
       user1 = User.create
