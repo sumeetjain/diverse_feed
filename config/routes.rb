@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :reports, only: [:new, :create, :show]
+
   delete "/logout", to: 'sessions#destroy'
   get '/auth/:provider/callback', to: 'sessions#create'
   
