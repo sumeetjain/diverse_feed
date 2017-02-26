@@ -14,7 +14,7 @@
 #
 
 class Report < ActiveRecord::Base
-  attr_writer :twitter_service
+  attr_writer :twitter_client
 
   belongs_to :asker, class_name: "User", foreign_key: "user_id"
 
@@ -25,11 +25,12 @@ class Report < ActiveRecord::Base
   # end
 
   def generate
+    self.twitter_id = twitter_service.user_id(subject)
   end
 
   private
 
   def twitter_service
-    @twitter_service ||= TwitterService.new(asker)
+    @twitter_service ||= TwitterService.new(asker: asker, client: @twitter_client)
   end
 end

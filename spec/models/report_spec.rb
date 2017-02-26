@@ -18,12 +18,12 @@ require 'rails_helper'
 RSpec.describe Report, type: :model do
   describe '#generate' do
     before :example do
-      @report = Report.new(subject: "hul", twitter_service: FakeTwitter.new)
+      @report = Report.new(subject: "hul", twitter_client: FakeTwitter.new)
       @report.generate
     end
 
     it "sets twitter_id" do
-      expect(@report.twitter_id).to eq(1)
+      expect(@report.twitter_id).to eq(10)
     end
 
     it "sets friends_count" do
