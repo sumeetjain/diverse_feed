@@ -20,4 +20,14 @@ RSpec.describe TwitterService, type: :service do
       expect(twitter.user_id("hul")).to eq(10)
     end
   end
+
+  describe '#friends_count' do
+    it "counts how many friends someone has" do
+      asker = double(:asker, twitter_key: ENV["ACCESS_TOKEN"], twitter_secret: ENV["ACCESS_SECRET"])
+
+      twitter = TwitterService.new(asker: asker, client: FakeTwitter.new)
+
+      expect(twitter.friends_count("hul")).to eq(5)
+    end
+  end
 end

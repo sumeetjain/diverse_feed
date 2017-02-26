@@ -20,12 +20,9 @@ class Report < ActiveRecord::Base
 
   serialize :demographics, Hash
 
-  # def twitter_id
-  #   @twitter_id ||= 
-  # end
-
   def generate
-    self.twitter_id = twitter_service.user_id(subject)
+    self.twitter_id    = twitter_service.user_id(subject)
+    self.friends_count = twitter_service.friends_count(subject)
   end
 
   private
