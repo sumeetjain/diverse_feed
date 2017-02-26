@@ -43,22 +43,18 @@ RSpec.describe Report, type: :model do
       ])
 
       @report = Report.new(subject: "hul", twitter_client: FakeTwitter.new)
-      @report.generate
+      @report.save
     end
 
-    describe '#friends_count' do
-      it "counts the report subject's friends" do
+    describe '#create' do
+      it "sets friends_count" do
         expect(@report.friends_count).to eq(5)
       end
-    end
 
-    describe '#friends_in_report_count' do
-      it "counts the report subject's friends with demographic data" do
+      it "sets friends_in_report_count" do
         expect(@report.friends_in_report_count).to eq(4)
       end
-    end
 
-    describe '#generate' do
       it "sets demographics, race" do
         expect(@report.demographics[:race]).to include({
           "White"  => 50.0,
