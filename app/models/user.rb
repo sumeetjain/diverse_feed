@@ -17,6 +17,7 @@
 
 class User < ActiveRecord::Base
   has_many :reports
+  has_many :demographics
 
   # Initialize a User from the OAuth flow.
   # 

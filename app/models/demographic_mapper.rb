@@ -15,8 +15,8 @@ class DemographicMapper
   def map_race
     @race = Hash.new(0)
 
-    @friends_info[:race].each do |user_id, values|
-      values.each { |value| @race[value] += share_amounts[:race] }
+    @friends_info["race"].each do |value|
+      @race[value] += share_amounts["race"]
     end
 
     @race
@@ -28,8 +28,8 @@ class DemographicMapper
   def map_income
     @income = Hash.new(0)
 
-    @friends_info[:income].each do |user_id, value|
-      @income[value] += share_amounts[:income]
+    @friends_info["income"].each do |value|
+      @income[value] += share_amounts["income"]
     end
 
     @income
@@ -50,15 +50,6 @@ class DemographicMapper
   # 
   # Returns Float.
   def share_amount(key)
-    (100.0 / total_values(@friends_info[key])).round(2)
-  end
-
-  # Counts how many values there are for a given part of friends_info.
-  # 
-  # data - Hash containing a subset of friends_info (e.g. 'race')
-  # 
-  # Returns Integer.
-  def total_values(data)
-    data.values.flatten.length
+    (100.0 / @friends_info[key].length).round(2)
   end
 end
