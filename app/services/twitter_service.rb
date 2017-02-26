@@ -26,6 +26,24 @@ class TwitterService
     client.friend_ids(subject).attrs[:ids]
   end
 
+  # Count how many friends someone has.
+  # 
+  # subject - String account name of who to look up.
+  # 
+  # Returns Integer.
+  def friends_count(subject)
+    subject_friend_ids(subject).length
+  end
+
+  # Get an account's Twitter ID.
+  # 
+  # subject - String account name of who to look up.
+  # 
+  # Returns the ID Integer.
+  def user_id(subject)
+    client.user(subject).id
+  end
+
   private
 
   # Twitter API Gem initialization.

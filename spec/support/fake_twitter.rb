@@ -6,7 +6,15 @@
 
 class FakeTwitter
   def friend_ids(subject)
-    attrs = {ids: [1, 2, 3]}
+    attrs = {ids: [1, 2, 3, 4, 5]}
     OpenStruct.new(attrs: attrs)
+  end
+
+  def user(subject)
+    OpenStruct.new(id: 10)
+  end
+
+  def friends_count(subject)
+    subject_friend_ids(subject).length
   end
 end
