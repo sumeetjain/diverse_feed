@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: diverse-feed_production
-  username: diverse-feed
-  password: <%= ENV['DIVERSE-FEED_DATABASE_PASSWORD'] %>
+  username: rails
+  password: <%= ENV['APP_DATABASE_PASSWORD'] %>
