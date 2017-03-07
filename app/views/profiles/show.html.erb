@@ -1,15 +1,23 @@
-<%= form_for @user, builder: ProfileFormBuilder, url: :profile, method: :put do |f| %>
+<%= form_for @user, url: :profile, method: :put do |f| %>
 
   <fieldset>
     Income<br>
 
-    <%= f.income_field %>
+    <%= f.fields_for :income do |income_field| %>
+      <%= render "income_fields", { f: income_field } %>
+    <% end %>
   </fieldset>
 
   <fieldset>
     Race<br>
 
-    <%= f.race_fields %>
+    <%= f.fields_for :races do |race_field| %>
+      <%= render "race_fields", { f: race_field } %>
+    <% end %>
+
+    <div class="links">
+      <%= link_to_add_association 'Add', f, :races %>
+    </div>
   </fieldset>
 
   <%= f.submit "Save Profile" %>

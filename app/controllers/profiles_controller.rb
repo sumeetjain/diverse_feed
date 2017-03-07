@@ -22,6 +22,11 @@ class ProfilesController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit({demographics_attributes: [:id, :key, :value]})
+    demographic_attrs = [:id, :key, :value, :_destroy]
+    
+    params.require(:user).permit({
+      races_attributes: demographic_attrs,
+      income_attributes: demographic_attrs
+    })
   end
 end

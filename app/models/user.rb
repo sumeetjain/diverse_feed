@@ -19,7 +19,13 @@ class User < ActiveRecord::Base
   has_many :reports
   has_many :demographics
 
-  accepts_nested_attributes_for :demographics
+  has_one :income, -> { where("key = ?", 
+    Demographic.keys[:income]) }, class_name: "Demographic"
+  has_many :races, -> { where("key = ?", 
+    Demographic.keys[:race]) }, class_name: "Demographic"
+
+  accepts_nested_attributes_for :income, allow_destroy: true
+  accepts_nested_attributes_for :races, allow_destroy: true
 
   # Initialize a User from the OAuth flow.
   # 
