@@ -1,13 +1,16 @@
-<%= form_for @profile, url: :profile, method: :put do |f| %>
-  <%= f.label :income %>
-  <%= f.number_field :income %>
+<%= form_for @user, builder: ProfileFormBuilder, url: :profile, method: :put do |f| %>
 
-  <br>
+  <fieldset>
+    Income<br>
 
-  <%= f.label :race %>
-  <%= f.text_area :race %>
+    <%= f.income_field %>
+  </fieldset>
 
-  <br>
+  <fieldset>
+    Race<br>
+
+    <%= f.race_fields %>
+  </fieldset>
 
   <%= f.submit "Save Profile" %>
 <% end %>

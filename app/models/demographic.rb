@@ -12,4 +12,11 @@
 
 class Demographic < ActiveRecord::Base
   belongs_to :user
+
+  # Enums define scopes for each demographic key.
+  enum key: {
+    race:      1,
+    income:    2,
+    education: 3
+  }
 end

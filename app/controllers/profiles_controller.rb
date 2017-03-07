@@ -1,13 +1,13 @@
 class ProfilesController < ApplicationController
+  before_filter :set_profile
+
   def show
-    @profile = current_user.profile
   end
 
   def update
-    @profile = current_user.profile
-    @profile.assign_attributes(profile_params)
+    @user.assign_attributes(user_params)
 
-    if @profile.save
+    if @user.save
       redirect_to :profile, notice: "Profile saved."
     else
       flash.now[:alert] = "Problem saving the profile."
@@ -17,7 +17,11 @@ class ProfilesController < ApplicationController
 
   private
 
-  def profile_params
-    params.require(:profile).permit(:race, :income)
+  def set_profile
+    @user = current_user
+  end
+
+  def user_params
+    params.require(:user).permit({demographics_attributes: [:id, :key, :value]})
   end
 end

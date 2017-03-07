@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
   has_many :reports
   has_many :demographics
 
+  accepts_nested_attributes_for :demographics
+
   # Initialize a User from the OAuth flow.
   # 
   # auth_hash - Hash containing the Twitter OAuth response.
@@ -26,11 +28,6 @@ class User < ActiveRecord::Base
   # Returns a User.
   def self.find_or_create_from_twitter(auth_hash)
     find_by_twitter_id(auth_hash[:uid]) || create_from_twitter(auth_hash)
-  end
-
-  # Returns the user's demographic Profile.
-  def profile
-    Profile.new(user: self)
   end
 
   private
