@@ -42,4 +42,20 @@ RSpec.describe User, type: :model do
       expect(user).to_not be_nil
     end
   end
+
+  describe '#income' do
+    it "it returns a Demographic for a brand new user" do
+      user = User.new
+
+      expect(user.income).to be_a(Demographic)
+    end
+
+    it "it returns income for a user who already saved their income" do
+      user = User.new
+      income = Demographic.new(key: :income, value: "50000")
+      user.income = income
+
+      expect(user.income.value).to eq("50000")
+    end
+  end
 end
