@@ -37,6 +37,13 @@ class User < ActiveRecord::Base
     find_by_twitter_id(auth_hash[:uid]) || create_from_twitter(auth_hash)
   end
 
+  # Every user should have an income as defined by the `has_one :income`
+  # association, or if not they should have an unsaved Demographic object
+  # that is ready to be given a value for income.
+  def income
+    super || build_income
+  end
+
   private
 
   # Create a new user from Twitter's OAuth flow.
