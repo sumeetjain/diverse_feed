@@ -5,18 +5,22 @@
 # of a person's friends are of a given demographic value.
 
 class DemographicMapper
-  attr_reader :friends_info, :race, :income
+  attr_reader :friends_info, :race, :income, :sexual_orientation, :religion
 
   def initialize(friends_info)
     @friends_info = friends_info
     @race = map_race
     @income = map_income
+    @sexual_orientation = map_sexual_orientation
+    @religion = map_religion
   end
 
   def to_hash
     {
       race:   map_race,
-      income: map_income
+      income: map_income,
+      sexual_orientation: map_sexual_orientation,
+      religion: map_religion
     }
   end
 
@@ -46,6 +50,32 @@ class DemographicMapper
     end
 
     @income
+  end
+
+  # Count proportions of each particular 'sexual orientation' value in friends_info.
+  #
+  # Returns Hash of values and percentage of that value's makeup.
+  def map_sexual_orientation
+    @sexual_orientation = Hash.new(0)
+
+    @friends_info["sexual_orientation"].each do |value|
+      @sexual_orientation[value] += share_amounts["sexual_orientation"]
+    end
+
+    @sexual_orientation
+  end
+
+  # Count proportions of each particular 'religion' value in friends_info.
+  #
+  # Returns Hash of values and percentage of that value's makeup.
+  def map_religion
+    @religion = Hash.new(0)
+
+    @friends_info["religion"].each do |value|
+      @religion[value] += share_amounts["religion"]
+    end
+
+    @religion
   end
 
   # Returns Hash containing each key's share_amount.

@@ -8,7 +8,9 @@ class DemographicCollector
   # Running list of demographic categories.
   KEYS = [
     "race",
-    "income"
+    "income",
+    "sexual_orientation",
+    "religion",
   ]
 
   def initialize(ids)
@@ -23,6 +25,8 @@ class DemographicCollector
     result.each do |row|
       add_to_info(row, "race")   { |v| v }
       add_to_info(row, "income") { |v| v.to_i }
+      add_to_info(row, "sexual_orientation")   { |v| v }
+      add_to_info(row, "religion")   { |v| v }
     end
   end
 

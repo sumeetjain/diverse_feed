@@ -17,6 +17,8 @@ class Demographic < ActiveRecord::Base
   enum key: {
     race:      1,
     income:    2,
-    education: 3
+    education: 3,
+    sexual_orientation: 4,
+    religion: 5
   }
 end
