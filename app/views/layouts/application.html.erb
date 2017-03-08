@@ -8,8 +8,9 @@
 </head>
 <body>
 
-<% if session[:user_id] %>
-  <%= link_to "Logout", :logout, method: :delete %>
+<% if current_user %>
+  <%= link_to "Logout", :logout, method: :delete %> | 
+  <%= link_to "Profile", :profile %>
 <% end %>
 
 <%= yield %>
