@@ -25,7 +25,8 @@ class User < ActiveRecord::Base
     Demographic.keys[:race]) }, class_name: "Demographic"
 
   accepts_nested_attributes_for :income, allow_destroy: true
-  accepts_nested_attributes_for :races, allow_destroy: true
+  accepts_nested_attributes_for :races, allow_destroy: true, 
+    reject_if: proc { |attrs| attrs['value'].blank? }
 
   # Initialize a User from the OAuth flow.
   # 
