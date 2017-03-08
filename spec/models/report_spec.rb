@@ -71,7 +71,14 @@ RSpec.describe Report, type: :model do
           65000 => 25.0
         })
       end
-    end
+		end
+
+		describe '#recent_report_exists?' do
+			it "checks to see if there is an existing report less than 12 hours old" do
+				expect(Report.recent_report_exists?("hul")).to eq(@report)
+				expect(Report.recent_report_exists?("sumeetjain")).to be_nil
+			end
+		end
   end
 
   pending "cannot be generated if report subject follows fewer than 50 accounts total"

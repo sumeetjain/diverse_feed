@@ -14,3 +14,4 @@
 
 # Ignore each dev's personal environment vars.
 .env.local
+/.idea

@@ -22,6 +22,11 @@ class Report < ActiveRecord::Base
 
   before_create :generate_report_details
 
+  # Checks to see if report has already been created within last 12 hours
+  def self.recent_report_exists?(subject)
+    Report.where(subject: subject, updated_at: (Time.now - 12.hours)..Time.now).first
+  end
+
   private
 
   attr_reader :friend_twitter_ids, :friend_user_ids
@@ -57,4 +62,5 @@ class Report < ActiveRecord::Base
     frequency_map                = DemographicMapper.new(demographics.info)
     self.demographics            = frequency_map.to_hash
   end
+
 end
