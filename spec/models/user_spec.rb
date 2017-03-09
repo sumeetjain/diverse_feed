@@ -57,5 +57,37 @@ RSpec.describe User, type: :model do
 
       expect(user.income.value).to eq("50000")
     end
+	end
+
+  describe '#sexual_orientation' do
+    it "it returns a Demographic for a brand new user" do
+      user = User.new
+
+      expect(user.sexual_orientation).to be_a(Demographic)
+    end
+
+    it "it returns sexual_orientation for a user who already saved their sexual_orientation" do
+      user = User.new
+      sexual_orientation = Demographic.new(key: :sexual_orientation, value: "gay")
+      user.sexual_orientation = sexual_orientation
+
+      expect(user.sexual_orientation.value).to eq("gay")
+    end
+	end
+
+  describe '#religion' do
+    it "it returns a Demographic for a brand new user" do
+      user = User.new
+
+      expect(user.religion).to be_a(Demographic)
+    end
+
+    it "it returns religion for a user who already saved their religion" do
+      user = User.new
+      religion = Demographic.new(key: :religion, value: "jedi")
+      user.religion = religion
+
+      expect(user.religion.value).to eq("jedi")
+    end
   end
 end

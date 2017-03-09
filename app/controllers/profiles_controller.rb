@@ -5,7 +5,6 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    binding.pry
     @user.assign_attributes(user_params)
 
     if @user.save
