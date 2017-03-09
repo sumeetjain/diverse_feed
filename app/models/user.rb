@@ -29,10 +29,10 @@ class User < ActiveRecord::Base
     Demographic.keys[:religion]) }, class_name: "Demographic"
 
   accepts_nested_attributes_for :income, allow_destroy: true
-  accepts_nested_attributes_for :races, allow_destroy: true
+  accepts_nested_attributes_for :races, allow_destroy: true,
+    reject_if: proc { |attrs| attrs['value'].blank? }
   accepts_nested_attributes_for :sexual_orientation, allow_destroy: true
-  accepts_nested_attributes_for :religion, allow_destroy: true,
-  reject_if: proc { |attrs| attrs['value'].blank? }
+  accepts_nested_attributes_for :religion, allow_destroy: true
 
   # Initialize a User from the OAuth flow.
   # 

@@ -45,9 +45,9 @@ class DemographicCollector
   def sql
     "SELECT * FROM crosstab('SELECT id, key, value FROM demographics 
       WHERE user_id IN (#{ids.join(",")}) ORDER BY 1', 
-      $$VALUES (1), (2)$$) 
+      $$VALUES (1), (2), (3), (4)$$)
       AS (id int, 
-      race varchar, income varchar);"
+      race varchar, income varchar, sexual_orientation varchar, religion varchar);"
   end
 
   # Returns results from SQL execution as Array of Hashes.

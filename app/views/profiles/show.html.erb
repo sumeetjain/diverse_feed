@@ -20,22 +20,22 @@
     </div>
   </fieldset>
 
-	<fieldset>
+  <fieldset>
 		Sexual Orientation<br>
 
 		<%= f.fields_for :sexual_orientation do |sexual_orientation_field| %>
 				<%= render "sexual_orientation_fields", { f: sexual_orientation_field } %>
 		<% end %>
-	</fieldset>
+  </fieldset>
 
 
-	<fieldset>
+  <fieldset>
 		Religion<br>
 
 		<%= f.fields_for :religion do |religion_field| %>
 				<%= render "religion_fields", {f: religion_field } %>
 		<% end %>
-	</fieldset>
+  </fieldset>
 
   <%= f.submit "Save Profile" %>
 <% end %>
