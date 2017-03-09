@@ -75,19 +75,19 @@ RSpec.describe Report, type: :model do
   end
 
   describe '.random' do
-    before :example do
+    it "gets a random report" do
+      # Setup
       Report.destroy_all
 
       Report.create(subject: "A", twitter_client: FakeTwitter.new)
       Report.create(subject: "B", twitter_client: FakeTwitter.new)
       Report.create(subject: "C", twitter_client: FakeTwitter.new)
-    end
 
-    it "gets a random report" do
       # Stub the actual randomizer with a hard-coded value, so I can predict
       # the result of Report.random.
       expect(Report).to receive(:random_offset) { 1 }
 
+      # Exercise/Verify
       expect(Report.random.subject).to eq("B")
     end
   end
