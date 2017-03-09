@@ -72,11 +72,45 @@ RSpec.describe Report, type: :model do
         })
       end
 		end
+	end
 
-		describe '#recent_report_exists?' do
-			it "checks to see if there is an existing report less than 12 hours old" do
-				expect(Report.recent_report_exists?("hul")).to eq(@report)
-				expect(Report.recent_report_exists?("sumeetjain")).to be_nil
+	context 'check for existing report less than 12 hours old' do
+		before :example do
+			user1 = User.create(twitter_id: 1)
+			user1.demographics.create([
+																	{key: 1, value: "White"},
+																	{key: 2, value: 20000}
+																])
+
+			user2 = User.create(twitter_id: 2)
+			user2.demographics.create([
+																	{key: 1, value: "White"},
+																	{key: 2, value: 45000}
+																])
+
+			user3 = User.create(twitter_id: 3)
+			user3.demographics.create([
+																	{key: 1, value: "Black"},
+																	{key: 2, value: 60000}
+																])
+
+			user4 = User.create(twitter_id: 4)
+			user4.demographics.create([
+																	{key: 1, value: "Indian"},
+																	{key: 2, value: 65000}
+																])
+
+			@report = Report.new(subject: "hul", twitter_client: FakeTwitter.new)
+			@report.save
+		end
+
+		describe '.recent_report' do
+			it "returns a recent report when there is one" do
+				expect(Report.recent_report("hul")).to eq(@report)
+			end
+
+			it "returns nil if there's no recent report" do
+				expect(Report.recent_report("sumeetjain")).to be_nil
 			end
 		end
   end

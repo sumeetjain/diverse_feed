@@ -8,7 +8,7 @@ class ReportsController < ApplicationController
   end
 
   def create
-    if (@report = Report.recent_report_exists?(report_params[:subject]))
+    if (@report = Report.recent_report(report_params[:subject]))
       redirect_to @report, notice: "Report loaded!"
     else
       @report = current_user.reports.build(report_params)
