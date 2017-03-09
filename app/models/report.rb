@@ -22,6 +22,11 @@ class Report < ActiveRecord::Base
 
   before_create :generate_report_details
 
+  # Returns a random Report.
+  def self.random
+    offset(rand(count)).first
+  end
+
   private
 
   attr_reader :friend_twitter_ids, :friend_user_ids
