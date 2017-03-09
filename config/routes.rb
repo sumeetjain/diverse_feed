@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   delete "/logout", to: 'sessions#destroy'
   get '/auth/:provider/callback', to: 'sessions#create'
+  get '/login', to: redirect('/auth/twitter'), as: :login
 
   root to: 'homepage#show'
 end
