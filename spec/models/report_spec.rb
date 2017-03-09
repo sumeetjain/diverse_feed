@@ -44,6 +44,9 @@ RSpec.describe Report, type: :model do
 
       @report = Report.new(subject: "hul", twitter_client: FakeTwitter.new)
       @report.save
+
+			@report2 = Report.new(subject: "sumeetjain", twitter_client: FakeTwitter.new, updated_at: Time.now - 24.hours)
+			@report2.save
     end
 
     describe '#create' do
@@ -72,37 +75,6 @@ RSpec.describe Report, type: :model do
         })
       end
 		end
-	end
-
-	context 'check for existing report less than 12 hours old' do
-		before :example do
-			user1 = User.create(twitter_id: 1)
-			user1.demographics.create([
-																	{key: 1, value: "White"},
-																	{key: 2, value: 20000}
-																])
-
-			user2 = User.create(twitter_id: 2)
-			user2.demographics.create([
-																	{key: 1, value: "White"},
-																	{key: 2, value: 45000}
-																])
-
-			user3 = User.create(twitter_id: 3)
-			user3.demographics.create([
-																	{key: 1, value: "Black"},
-																	{key: 2, value: 60000}
-																])
-
-			user4 = User.create(twitter_id: 4)
-			user4.demographics.create([
-																	{key: 1, value: "Indian"},
-																	{key: 2, value: 65000}
-																])
-
-			@report = Report.new(subject: "hul", twitter_client: FakeTwitter.new)
-			@report.save
-		end
 
 		describe '.recent_report' do
 			it "returns a recent report when there is one" do
@@ -113,7 +85,7 @@ RSpec.describe Report, type: :model do
 				expect(Report.recent_report("sumeetjain")).to be_nil
 			end
 		end
-  end
+	end
 
   pending "cannot be generated if report subject follows fewer than 50 accounts total"
   pending "cannot be generated if report subject follows fewer than 10 accounts whose data is in our system"
