@@ -42,8 +42,8 @@ RSpec.describe DemographicCollector, type: :service do
       friends_data = {
         "race"   => ["White", "White", "Black", "Indian"],
         "income" => [20000, 45000, 60000, 65000],
-				"sexual_orientation" => ["lesbian", "bi-sexual", "heterosexual", "gay"],
-				"religion" => ["none", "Muslim", "Jedi", "none"]
+        "sexual_orientation" => ["lesbian", "bi-sexual", "heterosexual", "gay"],
+        "religion" => ["none", "Muslim", "Jedi", "none"]
       }
       expect(collector.info).to include(friends_data)
     end
@@ -115,7 +115,7 @@ RSpec.describe DemographicCollector, type: :service do
       user2 = User.create
       user2.demographics.create([
         {key: 2, value: 45000},
-			  {key: 4, value: "none"}
+        {key: 4, value: "none"}
       ])
 
       user3 = User.create

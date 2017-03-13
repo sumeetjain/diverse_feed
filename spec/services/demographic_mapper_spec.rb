@@ -28,7 +28,7 @@ RSpec.describe DemographicMapper, type: :service do
         60000 => 25.0,
         65000 => 25.0
       })
-		end
+    end
 
     it 'builds map for sexual orientation' do
       expect(@mapper.sexual_orientation).to include({
@@ -37,7 +37,7 @@ RSpec.describe DemographicMapper, type: :service do
         "heterosexual" => 25.0,
         "gay" => 25.0
        })
-		end
+    end
 
     it 'builds map for religion' do
       expect(@mapper.religion).to include({
@@ -58,7 +58,7 @@ RSpec.describe DemographicMapper, type: :service do
           "Black", "Indian", "Mexican", "Latino"
         ],
         "income" => [],
-			  "sexual_orientation" => [],
+        "sexual_orientation" => [],
         "religion" => []
       }
 
