@@ -22,3 +22,14 @@ $summaryBackground: $green;
 .legend{
   float: right;
 }
+
+.summaryTitle{
+  font-family: $sans-serif;
+  text-transform: uppercase;
+}
+
+.subjectUsername{
+  display: block;
+  text-decoration: none;
+  font-family: $serif;
+}
