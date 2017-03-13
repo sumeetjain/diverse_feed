@@ -1,6 +1,7 @@
 @import "reset";
 @import "neat";
 
+// Setting up the grid
 $neat-grid: (
   columns: 12,
   gutter: 20px,
@@ -11,3 +12,4 @@ $neat-grid: (
   width: 960px;
   margin: 0 auto;
 }
+
