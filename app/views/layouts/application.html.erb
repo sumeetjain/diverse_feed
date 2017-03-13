@@ -12,16 +12,52 @@
   <header>
     <h1 class="titleLink"><%= link_to "Diverse Feed", :root %></h1>
 
-    <ul class="siteNav">
-      <% if current_user %>
-        <li><%= link_to "Profile", :profile %></li>
-        <li><%= link_to "Log out", :logout, method: :delete %></li>
-      <% else %>
-        <li><%= link_to "Participate", :login %></li>
-        <li><%= link_to "Get a Report", :new_report %></li>
-      <% end %>
-    </ul>
+    <nav>
+      <ul class="siteNav">
+        <% if current_user %>
+          <li><%= link_to "Profile", :profile %></li>
+          <li><%= link_to "Log out", :logout, method: :delete %></li>
+        <% else %>
+          <li><%= link_to "Participate", :login %></li>
+          <li><%= link_to "Get a Report", :new_report %></li>
+        <% end %>
+      </ul>
+    </nav>
   </header>
+</div>
+
+<div class="container">
+  <div class="summary">
+    <div class="subject">
+      <h2>Diversity Report For</h2>
+      <a href="#" class="subject__username">@BarackObama</a>
+
+      <ul class="metaInfo">
+        <li>Follows 4567 accounts</li>
+        <li>Report based upon 31% of accounts followed</li>
+      </ul>
+    </div>
+
+    <div class="graphs">
+      <div class="graph">
+        <div class="exhibit">
+          <img src="https://placeholdit.imgix.net/~text?txtsize=28&txt=300%C3%97300&w=300&h=300">
+        </div>
+
+        <div class="legend">
+          Legend
+        </div>
+      </div>
+
+      <ul class="demographicKeys">
+        <li><a href="#">Race</a></li>
+        <li><a href="#">Sexual Orientation</a></li>
+        <li><a href="#">Income</a></li>
+      </ul>
+
+      <a href="#" class="fullReportLink">View Full Report</a>
+    </div>
+  </div>
 </div>
 
 <%= yield %>
