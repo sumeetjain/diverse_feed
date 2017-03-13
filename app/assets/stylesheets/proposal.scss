@@ -1,0 +1,13 @@
+$proposalBackground: $yellow;
+
+.proposal{
+  background-color: $yellow;
+}
+
+.proposalImage{
+  @include grid-column(4);
+}
+
+.proposalContent{
+  @include grid-column(8);
+}
