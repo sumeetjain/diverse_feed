@@ -27,6 +27,11 @@ class Report < ActiveRecord::Base
     offset(random_offset).first
   end
 
+  # Checks to see if report has already been created within last 12 hours
+  def self.recent_report(subject)
+    where(subject: subject, updated_at: (Time.now - 12.hours)..Time.now).first
+  end
+
   private
 
   attr_reader :friend_twitter_ids, :friend_user_ids
@@ -69,4 +74,5 @@ class Report < ActiveRecord::Base
   def self.random_offset
     rand(count)
   end
+
 end
