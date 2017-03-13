@@ -54,10 +54,10 @@ RSpec.describe User, type: :model do
       user = User.new
       income = Demographic.new(key: :income, value: "50000")
       user.income = income
-
+      
       expect(user.income.value).to eq("50000")
     end
-	end
+  end
 
   describe '#sexual_orientation' do
     it "returns a Demographic for a brand new user" do
