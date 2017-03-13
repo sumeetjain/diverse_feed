@@ -1,8 +1,14 @@
 <div class="summary">
   <div class="container gridContainer">
     <div class="subject">
-      <h2 class="summaryTitle">Diversity Report For</h2>
-      <a href="#" class="subjectUsername">@<%= report.subject %></a>
+      <div class="subjectHeader">
+        <img src="https://placeholdit.imgix.net/~text?txtsize=28&txt=160%C3%97160&w=160&h=160">
+
+        <h2 class="summaryTitle">
+          Diversity Report For
+          <a href="#" class="subjectUsername">@BarackObama<%# report.subject %></a>
+        </h2>
+      </div>
 
       <ul class="metaInfo">
         <li>Follows 4567 accounts</li>
@@ -16,11 +22,11 @@
           <img src="https://placeholdit.imgix.net/~text?txtsize=28&txt=300%C3%97300&w=300&h=300">
 
           <% report.demographics.each do |key, value| %>
-            <p>
+            <!-- <p>
               <strong><%= key %></strong>
 
               <%= value.to_s %>
-            </p>
+            </p> -->
           <% end %>
         </div>
 

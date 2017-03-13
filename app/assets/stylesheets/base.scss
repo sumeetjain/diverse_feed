@@ -1,8 +1,10 @@
 body, div, span, p, ul, ol{
   color: $defaultTextColor;
+  font-family: $sans-serif;
 }
 
 a{
   color: $defaultLinkColor;
   text-decoration: none;
+  font-family: $sans-serif;
 }
