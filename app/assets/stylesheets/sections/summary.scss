@@ -64,7 +64,7 @@
 
 .demographicKeys a{
   padding: 4px 6px;
-  background: lighten($defaultTextColor, 30%);
+  background: lighten($defaultTextColor, 20%);
   text-transform: uppercase;
   color: $demographicKeyColor;
   margin-right: 9px;
@@ -80,4 +80,8 @@
   color: #fff;
   padding: 8px 12px;
   font-size: 20px;
+
+  &:hover{
+    background: saturate($fullReportLinkBackground, 20%);
+  }
 }
