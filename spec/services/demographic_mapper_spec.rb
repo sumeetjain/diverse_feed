@@ -5,7 +5,9 @@ RSpec.describe DemographicMapper, type: :service do
     before(:example) do
       friends_info = {
         "race" => ["White", "White", "Black", "Indian"],
-        "income" => [20000, 45000, 60000, 65000]
+        "income" => [20000, 45000, 60000, 65000],
+        "sexual_orientation" => ["straight", "queer", "heterosexual", "gay"],
+        "religion" => ["Christian", "Buddhist", "Muslim", "none"]
       }
 
       @mapper = DemographicMapper.new(friends_info)
@@ -27,6 +29,24 @@ RSpec.describe DemographicMapper, type: :service do
         65000 => 25.0
       })
     end
+
+    it 'builds map for sexual orientation' do
+      expect(@mapper.sexual_orientation).to include({
+        "straight" => 25.0,
+        "queer" => 25.0,
+        "heterosexual" => 25.0,
+        "gay" => 25.0
+       })
+    end
+
+    it 'builds map for religion' do
+      expect(@mapper.religion).to include({
+        "Christian" => 25.0,
+        "Buddhist" => 25.0,
+        "Muslim" => 25.0,
+        "none" => 25.0
+       })
+    end
   end
 
   context "for multiple values per key" do
@@ -37,7 +57,9 @@ RSpec.describe DemographicMapper, type: :service do
           "Indian", "Black", "Chinese",
           "Black", "Indian", "Mexican", "Latino"
         ],
-        "income" => []
+        "income" => [],
+        "sexual_orientation" => [],
+        "religion" => []
       }
 
       @mapper = DemographicMapper.new(friends_info)
@@ -59,7 +81,9 @@ RSpec.describe DemographicMapper, type: :service do
     before(:example) do
       friends_info = {
         "race" => ["White", "Mexican", "Black", "Indian", "Mexican", "Latino"],
-        "income" => [20000, 60000, 60000]
+        "income" => [20000, 60000, 60000],
+        "sexual_orientation" => [],
+        "religion" => ["none", "none", "Jedi"]
       }
 
       @mapper = DemographicMapper.new(friends_info)
@@ -80,6 +104,13 @@ RSpec.describe DemographicMapper, type: :service do
         20000 => 33.33,
         60000 => 66.66
       })
+		end
+
+    it 'builds map for religion' do
+      expect(@mapper.religion).to include({
+        "Jedi" => 33.33,
+        "none" => 66.66
+       })
     end
   end
 end

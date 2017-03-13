@@ -28,7 +28,9 @@ class ProfilesController < ApplicationController
 
     params.require(:user).permit({
       races_attributes: demographic_attrs,
-      income_attributes: demographic_attrs
+      income_attributes: demographic_attrs,
+      sexual_orientation_attributes: demographic_attrs,
+      religion_attributes: demographic_attrs
     })
   end
 end

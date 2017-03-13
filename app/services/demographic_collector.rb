@@ -8,7 +8,9 @@ class DemographicCollector
   # Running list of demographic categories.
   KEYS = [
     "race",
-    "income"
+    "income",
+    "sexual_orientation",
+    "religion",
   ]
 
   def initialize(ids)
@@ -21,8 +23,10 @@ class DemographicCollector
   # Add each database result row's values into the @info Hash.
   def collect_demographics
     result.each do |row|
-      add_to_info(row, "race")   { |v| v }
-      add_to_info(row, "income") { |v| v.to_i }
+      add_to_info(row, "race")               { |v| v }
+      add_to_info(row, "income")             { |v| v.to_i }
+      add_to_info(row, "sexual_orientation") { |v| v }
+      add_to_info(row, "religion")           { |v| v }
     end
   end
 
@@ -41,9 +45,9 @@ class DemographicCollector
   def sql
     "SELECT * FROM crosstab('SELECT id, key, value FROM demographics 
       WHERE user_id IN (#{ids.join(",")}) ORDER BY 1', 
-      $$VALUES (1), (2)$$) 
+      $$VALUES (1), (2), (3), (4)$$)
       AS (id int, 
-      race varchar, income varchar);"
+      race varchar, income varchar, sexual_orientation varchar, religion varchar);"
   end
 
   # Returns results from SQL execution as Array of Hashes.

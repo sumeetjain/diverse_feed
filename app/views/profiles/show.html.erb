@@ -29,6 +29,22 @@
           </div>
         </fieldset>
 
+        <fieldset class="profileSection">
+          <h3 class="profileSectionHeader">Sexual Orientation</h3>
+
+          <%= f.fields_for :sexual_orientation do |sexual_orientation_field| %>
+            <%= render "sexual_orientation_fields", { f: sexual_orientation_field } %>
+          <% end %>
+        </fieldset>
+
+        <fieldset class="profileSection">
+          <h3 class="profileSectionHeader">Religion</h3>
+
+          <%= f.fields_for :religion do |religion_field| %>
+                <%= render "religion_fields", {f: religion_field } %>
+              <% end %>
+        </fieldset>
+
         <%= f.submit "Save Profile", class: "btn btn--alt btn--full btn--big" %>
       <% end %>
     </div>
