@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>DiverseFeed</title>
+  <title>Diverse Feed</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= link_to "DIVERSE FEED", :root %> | 
+<div class="container">
+  <header>
+    <h1 class="titleLink"><%= link_to "Diverse Feed", :root %></h1>
 
-<% if current_user %>
-  <%= link_to "Logout", :logout, method: :delete %> | 
-  <%= link_to "Profile", :profile %> | 
-<% else %>
-  <%= link_to "Sign in", :login %>
-<% end %>
-
-<%= link_to "New Report", :new_report %>
+    <ul class="siteNav">
+      <% if current_user %>
+        <li><%= link_to "Profile", :profile %></li>
+        <li><%= link_to "Log out", :logout, method: :delete %></li>
+      <% else %>
+        <li><%= link_to "Participate", :login %></li>
+        <li><%= link_to "Get a Report", :new_report %></li>
+      <% end %>
+    </ul>
+  </header>
+</div>
 
 <%= yield %>
 
