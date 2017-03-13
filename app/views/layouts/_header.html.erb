@@ -1,0 +1,15 @@
+<header>
+  <h1 class="titleLink"><%= link_to "Diverse Feed", :root %></h1>
+
+  <nav>
+    <ul class="siteNav">
+      <% if current_user %>
+        <li><%= link_to "Profile", :profile %></li>
+        <li><%= link_to "Log out", :logout, method: :delete %></li>
+      <% else %>
+        <li><%= link_to "Participate", :login %></li>
+        <li><%= link_to "Get a Report", :new_report %></li>
+      <% end %>
+    </ul>
+  </nav>
+</header>
