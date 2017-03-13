@@ -1,0 +1,15 @@
+$headerBackground: #fff;
+$titleColor: $black;
+$navLinkColor: $grey;
+
+header{
+  background-color: $headerBackground;
+}
+
+.titleLink > a{
+  color: $titleColor;
+}
+
+.siteNav a{
+  color: $navLinkColor;
+}
