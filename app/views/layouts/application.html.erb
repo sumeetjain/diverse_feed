@@ -8,9 +8,13 @@
 </head>
 <body>
 
+<%= link_to "DIVERSE FEED", :root %> | 
+
 <% if current_user %>
   <%= link_to "Logout", :logout, method: :delete %> | 
   <%= link_to "Profile", :profile %> | 
+<% else %>
+  <%= link_to "Sign in", :login %>
 <% end %>
 
 <%= link_to "New Report", :new_report %>

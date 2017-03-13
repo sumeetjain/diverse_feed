@@ -22,6 +22,11 @@ class Report < ActiveRecord::Base
 
   before_create :generate_report_details
 
+  # Returns a random Report.
+  def self.random
+    offset(random_offset).first
+  end
+
   private
 
   attr_reader :friend_twitter_ids, :friend_user_ids
@@ -53,8 +58,15 @@ class Report < ActiveRecord::Base
     self.friends_count           = twitter_service.friends_count(subject)
     self.friends_in_report_count = friend_user_ids.length
 
-    demographics                 = DemographicCollector.new(friend_user_ids)
-    frequency_map                = DemographicMapper.new(demographics.info)
-    self.demographics            = frequency_map.to_hash
+    if friends_in_report_count > 0
+      demographics                 = DemographicCollector.new(friend_user_ids)
+      frequency_map                = DemographicMapper.new(demographics.info)
+      self.demographics            = frequency_map.to_hash
+    end
+  end
+
+  # Returns a random Integer between 1 and the number of rows in 'reports'.
+  def self.random_offset
+    rand(count)
   end
 end
