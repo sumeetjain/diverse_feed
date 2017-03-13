@@ -6,8 +6,6 @@ $neat-grid: (
   gutter: 0,
 );
 
-.container{
+.gridContainer{
   @include grid-container;
-  width: 960px;
-  margin: 0 auto;
 }
