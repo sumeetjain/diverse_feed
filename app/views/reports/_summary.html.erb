@@ -2,7 +2,7 @@
   <div class="container">
     <div class="subject">
       <h2>Diversity Report For</h2>
-      <a href="#" class="subject__username">@BarackObama</a>
+      <a href="#" class="subject__username">@<%= report.subject %></a>
 
       <ul class="metaInfo">
         <li>Follows 4567 accounts</li>
@@ -14,6 +14,14 @@
       <div class="graph">
         <div class="exhibit">
           <img src="https://placeholdit.imgix.net/~text?txtsize=28&txt=300%C3%97300&w=300&h=300">
+
+          <% report.demographics.each do |key, value| %>
+            <p>
+              <strong><%= key %></strong>
+
+              <%= value.to_s %>
+            </p>
+          <% end %>
         </div>
 
         <div class="legend">
@@ -22,9 +30,9 @@
       </div>
 
       <ul class="demographicKeys nav">
-        <li><a href="#">Race</a></li>
-        <li><a href="#">Sexual Orientation</a></li>
-        <li><a href="#">Income</a></li>
+        <% report.demographics.keys.each do |key| %>
+          <li><a href="#"><%= key %></a></li>
+        <% end %>
       </ul>
 
       <a href="#" class="fullReportLink">View Full Report</a>
