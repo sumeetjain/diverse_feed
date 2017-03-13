@@ -73,7 +73,7 @@ RSpec.describe User, type: :model do
 
       expect(user.sexual_orientation.value).to eq("gay")
     end
-	end
+  end
 
   describe '#religion' do
     it "returns a Demographic for a brand new user" do
