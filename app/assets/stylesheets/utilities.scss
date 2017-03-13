@@ -1,0 +1,13 @@
+// Layout/Positioning
+
+.left{
+  float: left;
+}
+
+.right{
+  float: right;
+}
+
+@mixin clearfix(){
+  @include grid-container;
+}

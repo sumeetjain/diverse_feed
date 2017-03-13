@@ -130,3 +130,5 @@ You can add any additional styling to containers as well as columns:
 
 - Avoid IDs, except where needed for on-page anchor links
 - Separate layout vs. formatting concerns into different styles
+- Avoid depending on impermanent HTML tags/ordering/structure in CSS selectors (e.g. `.title a` is probably okay, but `ul div` or `h4 a` are too prone to change)
+- Avoid CSS cleverness. If you find yourself hunting for an obscure selector, consider whether the CSS would be more maintainable if you just added a class that expressed your intention instead.

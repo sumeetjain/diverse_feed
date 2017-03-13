@@ -1,9 +1,9 @@
 <header>
   <div class="container">
-    <h1 class="titleLink"><%= link_to "Diverse Feed", :root %></h1>
+    <h1 class="titleLink left"><%= link_to "Diverse Feed", :root %></h1>
 
-    <nav>
-      <ul class="siteNav">
+    <nav class="right">
+      <ul class="siteNav nav">
         <% if current_user %>
           <li><%= link_to "Profile", :profile %></li>
           <li><%= link_to "Log out", :logout, method: :delete %></li>
