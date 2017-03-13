@@ -47,6 +47,7 @@ group :development do
   gem 'web-console', '~> 2.0'
 
   gem 'annotate'
+  gem 'guard'
 end
 
 gem 'omniauth-twitter'
