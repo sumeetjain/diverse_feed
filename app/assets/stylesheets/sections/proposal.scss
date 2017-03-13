@@ -1,6 +1,6 @@
 .proposal{
   background-color: $proposalBackground;
-  padding: 20px 0;
+  padding: 40px 0;
 }
 
 .proposalImage{
@@ -9,4 +9,16 @@
 
 .proposalContent{
   @include grid-column(8);
+  padding-left: 20px;
+}
+
+.proposalHeadline{
+  font-family: $serif;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.proposalContent .btn{
+  margin-top: 12px;
 }
