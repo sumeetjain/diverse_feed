@@ -1,14 +1,14 @@
-// Utilities and Helpers
-@import "reset";
-@import "box-model";
-@import "colors";
-@import "type";
-@import "utilities";
-@import "grid";
-@import "flex";
-@import "nav";
+// Utilities
+@import "utilities/reset";
+@import "utilities/box-model";
+@import "utilities/colors";
+@import "utilities/type";
+@import "utilities/layout";
+@import "utilities/grid";
+@import "utilities/flex";
+@import "utilities/nav";
 
-// Section- and Page-Specific Styles
-@import "header";
-@import "summary";
-@import "proposal";
+// Section Styles
+@import "sections/header";
+@import "sections/summary";
+@import "sections/proposal";
