@@ -19,19 +19,19 @@ class User < ActiveRecord::Base
   has_many :reports
   has_many :demographics
 
-  has_one :income, -> { where("key = ?", 
+  has_one :income, -> { where("key = ?",
     Demographic.keys[:income]) }, class_name: "Demographic"
-  has_many :races, -> { where("key = ?", 
+  has_many :races, -> { where("key = ?",
     Demographic.keys[:race]) }, class_name: "Demographic"
 
   accepts_nested_attributes_for :income, allow_destroy: true
-  accepts_nested_attributes_for :races, allow_destroy: true, 
+  accepts_nested_attributes_for :races, allow_destroy: true,
     reject_if: proc { |attrs| attrs['value'].blank? }
 
   # Initialize a User from the OAuth flow.
-  # 
+  #
   # auth_hash - Hash containing the Twitter OAuth response.
-  # 
+  #
   # Returns a User.
   def self.find_or_create_from_twitter(auth_hash)
     find_by_twitter_id(auth_hash[:uid]) || create_from_twitter(auth_hash)
@@ -47,9 +47,9 @@ class User < ActiveRecord::Base
   private
 
   # Create a new user from Twitter's OAuth flow.
-  # 
+  #
   # auth_hash - Hash containing the Twitter OAuth response.
-  # 
+  #
   # Returns a User.
   def self.create_from_twitter(auth_hash)
     user = self.new(

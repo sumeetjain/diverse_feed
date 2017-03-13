@@ -9,3 +9,23 @@
 $serif: 'Lusitana', serif;
 $serif-2: 'Merriweather', serif;
 $sans-serif: 'Merriweather Sans', sans-serif;
+
+.pageTitle{
+  font-size: 32px;
+  text-align: center;
+  font-family: $serif;
+  margin: 30px 0 18px;
+}
+
+.pageSubtitle{
+  font-size: 22px;
+  padding-bottom: 12px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid lighten($defaultTextColor, 50%);
+}
+
+.featuredPara{
+  font-size: 18px;
+  font-family: $serif-2;
+  margin-bottom: 24px;
+}
