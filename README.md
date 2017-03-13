@@ -57,7 +57,74 @@ This is specifically for files whose sole purpose in life is to help make the te
 
 ### Grid
 
-<http://neat.bourbon.io/docs/latest/>
+We're using _Neat_: <http://neat.bourbon.io/docs/latest/>
+
+This is a minimal, easy-to-understand CSS grid framework. It doesn't create any CSS classes (like `.column` or `.column-6`). Instead, it creates modules in SASS for you to `@include` inside your own CSS.
+
+Example:
+
+```scss
+.container{
+  @include grid-container;
+  width: 960px;
+  margin: 0 auto;
+}
+```
+
+That will generate:
+
+```css
+.container{
+  width: 960px;
+  margin: 0 auto;
+}
+.container::after{
+  clear: both;
+  content: "";
+  display: block;
+}
+```
+
+_Neat_ only creates a handful of essential modules. It'll take all of 5 minutes to read the entire set of docs at the link above. Each section of the docs shows the module and also the exact CSS that it will generate.
+
+#### How to contribute to this site's front-end:
+
+Don't overthink it. Much of the time, you won't need to worry about the grid at all. If you're just adding a couple elements which happen to be side-by-side, find a way to accomplish that with whatever CSS makes the most sense to you (flexbox, floats, etc).
+
+If you do end up needing to add something which should fit within the grid, your HTML should look something like this:
+
+```html
+<div class="sectionName">
+  <div class="container">
+    <p>Section's contents go here.</p>
+  </div>
+</div>
+```
+
+Within the section's container, define elements with classes as needed and include the relevant grid module on that class in CSS. E.g. if you have two elements that should fit _3 + 9_ into the grid, you'd end up with CSS like this:
+
+```scss
+.elementOne{
+  @include grid-column(3);
+}
+.elementTwo{
+  @include grid-column(9);
+}
+```
+
+You can add any additional styling to containers as well as columns:
+
+```scss
+.elementOne{
+  @include grid-column(3);
+  background-color: #ccc;
+}
+.elementTwo{
+  @include grid-column(9);
+  border-bottom: 2px solid #218902;
+  background-color: #0E3001;
+}
+```
 
 ### CSS Guidelines
 
