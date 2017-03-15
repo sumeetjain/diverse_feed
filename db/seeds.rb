@@ -1,7 +1,14 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+accts = YAML.load_file(Rails.root.join('lib', 'top_twitter_accounts.yml'))
+
+accts.each do |twitter_username, info|
+  if !info.nil?
+    user = User.new(twitter_username: twitter_username)
+
+    info["ethnicity"].each { |ethnicity| user.races.build(
+      key: :race,
+      value: ethnicity) }
+
+    user.save!
+    puts "Created user: #{user.inspect}"
+  end
+end
