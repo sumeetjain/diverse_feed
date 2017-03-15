@@ -18,6 +18,9 @@ class Demographic < ActiveRecord::Base
     race:               1,
     income:             2,
     sexual_orientation: 3,
-    religion:           4
+    religion:           4,
+    ethnicity:          5,
+    gender:             6,
+    year_of_birth:      7
   }
 end
