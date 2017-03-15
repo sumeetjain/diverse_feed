@@ -6,13 +6,13 @@
 
         <h2 class="summaryTitle">
           Diversity Report For
-          <a href="#" class="subjectUsername">@BarackObama<%# report.subject %></a>
+          <a href="#" class="subjectUsername">@<%= report.subject %></a>
         </h2>
       </div>
 
       <ul class="metaInfo">
-        <li>Follows 4567 accounts</li>
-        <li>Report based upon 31% of accounts followed</li>
+        <li>Follows <%= report.friends_count %> accounts</li>
+        <li>Report based upon <%= report.friends_in_report_percentage %>% of accounts followed</li>
       </ul>
     </div>
 
