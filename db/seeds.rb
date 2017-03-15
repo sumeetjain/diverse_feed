@@ -1,14 +1,26 @@
-accts = YAML.load_file(Rails.root.join('lib', 'top_twitter_accounts.yml'))
+require "csv"
 
-accts.each do |twitter_username, info|
-  if !info.nil?
-    user = User.new(twitter_username: twitter_username)
+CSV.foreach(Rails.root.join('lib', 'seeds.csv'), {headers: true}) do |row|
+  user = User.new(twitter_username: row["twitter_username"])
 
-    info["ethnicity"].each { |ethnicity| user.races.build(
-      key: :race,
-      value: ethnicity) }
+  user.genders.build(
+    key: :gender,
+    value: row["gender"]) if !row["gender"].blank?
 
-    user.save!
-    puts "Created user: #{user.inspect}"
-  end
+  user.races.build(
+    key: :race,
+    value: row["race"]) if !row["race"].blank?
+
+  user.build_year_of_birth(
+    key: :year_of_birth,
+    value: row["year_of_birth"]) if !row["year_of_birth"].blank?
+
+  ethnicities = row["ethnicities"].split(",").map { |e| e.strip }
+
+  ethnicities.each { |ethnicity| user.ethnicities.build(
+    key: :ethnicity,
+    value: ethnicity) }
+
+  user.save!
+  puts "Created user: #{user.inspect} - #{user.demographics.select(:key, :value).inspect}"
 end
