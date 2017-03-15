@@ -23,16 +23,28 @@ class User < ActiveRecord::Base
     Demographic.keys[:income]) }, class_name: "Demographic"
   has_many :races, -> { where("key = ?",
     Demographic.keys[:race]) }, class_name: "Demographic"
+  has_many :genders, -> { where("key = ?",
+    Demographic.keys[:gender]) }, class_name: "Demographic"
+  has_many :ethnicities, -> { where("key = ?",
+    Demographic.keys[:ethnicity]) }, class_name: "Demographic"
   has_one :sexual_orientation, -> { where("key = ?",
     Demographic.keys[:sexual_orientation]) }, class_name: "Demographic"
   has_one :religion, -> { where("key = ?",
     Demographic.keys[:religion]) }, class_name: "Demographic"
+  has_one :year_of_birth, -> { where("key = ?",
+    Demographic.keys[:year_of_birth]) }, class_name: "Demographic"
 
   accepts_nested_attributes_for :income, allow_destroy: true
-  accepts_nested_attributes_for :races, allow_destroy: true,
-    reject_if: proc { |attrs| attrs['value'].blank? }
+  accepts_nested_attributes_for :year_of_birth, allow_destroy: true
   accepts_nested_attributes_for :sexual_orientation, allow_destroy: true
   accepts_nested_attributes_for :religion, allow_destroy: true
+
+  accepts_nested_attributes_for :races, allow_destroy: true,
+    reject_if: proc { |attrs| attrs['value'].blank? }
+  accepts_nested_attributes_for :genders, allow_destroy: true,
+    reject_if: proc { |attrs| attrs['value'].blank? }
+  accepts_nested_attributes_for :ethnicities, allow_destroy: true,
+    reject_if: proc { |attrs| attrs['value'].blank? }
 
   # Initialize a User from the OAuth flow.
   #
@@ -62,6 +74,11 @@ class User < ActiveRecord::Base
   # that is ready to be given a value for religion.
   def religion
     super || build_religion
+  end
+
+  # Seed year of birth, if needed.
+  def year_of_birth
+    super || build_year_of_birth
   end
 
   private
