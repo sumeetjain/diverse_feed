@@ -54,3 +54,4 @@ end
 gem 'omniauth-twitter'
 gem 'twitter'
 gem "cocoon"
+gem "neat"

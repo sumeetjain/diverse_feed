@@ -1,6 +1,7 @@
 class ReportsController < ApplicationController
   def show
-    @report = Report.find(params[:id])
+    report = Report.find(params[:id])
+    @report = ReportPresenter.new(report)
   end
 
   def new
@@ -8,13 +9,16 @@ class ReportsController < ApplicationController
   end
 
   def create
-    @report = current_user.reports.build(report_params)
-
-    if @report.save
-      redirect_to @report, notice: "Report generated!"
+    if (@report = Report.recent_report(report_params[:subject]))
+      redirect_to @report, notice: "Report loaded!"
     else
-      flash.now[:alert] = "There was a problem."
-      render :new
+      @report = current_user.reports.build(report_params)
+      if @report.save
+        redirect_to @report, notice: "Report generated!"
+      else
+        flash.now[:alert] = "There was a problem."
+        render :new
+      end
     end
   end
 

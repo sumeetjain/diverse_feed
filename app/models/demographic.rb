@@ -15,8 +15,12 @@ class Demographic < ActiveRecord::Base
 
   # Enums define scopes for each demographic key.
   enum key: {
-    race:      1,
-    income:    2,
-    education: 3
+    race:               1,
+    income:             2,
+    sexual_orientation: 3,
+    religion:           4,
+    ethnicity:          5,
+    gender:             6,
+    year_of_birth:      7
   }
 end

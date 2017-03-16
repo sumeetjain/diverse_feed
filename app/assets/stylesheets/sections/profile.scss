@@ -1,0 +1,49 @@
+.demographicSurvey{
+  width: 720px;
+  margin: 0 auto;
+  margin-top: 40px;
+  padding: 40px;
+  background-color: $demographicSurveyBackground;
+}
+
+.profileSection{
+  margin-bottom: 24px;
+}
+
+.profileSectionHeader{
+  font-family: $serif;
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.nested-fields{
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.add_fields{
+  background-color: $removeFieldBackground;
+  color: #fff;
+  padding: 8px 10px;
+  margin-top: 3px;
+  display: inline-block;
+  align-items: center;
+
+  &:hover{
+    background-color: saturate($removeFieldBackground, 20%);
+  }
+}
+
+.remove_fields{
+  margin-left: 6px;
+  color: $removeFieldBackground;
+
+  &:hover{
+    color: saturate($removeFieldBackground, 20%);
+  }
+}
+
+.demographicSurvey .btn{
+  margin-top: 20px;
+}

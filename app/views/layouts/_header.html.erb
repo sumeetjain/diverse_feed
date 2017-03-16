@@ -1,0 +1,18 @@
+<header>
+  <div class="container flexContainer">
+    <h1 class="titleLink left"><%= link_to "Diverse Feed", :root %></h1>
+
+    <nav class="right">
+      <ul class="siteNav nav">
+        <li><%= link_to "Get a Report", :new_report %></li>
+
+        <% if current_user %>
+          <li><%= link_to "Profile", :profile %></li>
+          <li><%= link_to "Log out", :logout, method: :delete %></li>
+        <% else %>
+          <li><%= link_to "Participate", :login %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</header>

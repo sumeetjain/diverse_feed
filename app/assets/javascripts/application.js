@@ -12,5 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
 //= require cocoon
+//= require chart.min
+//= require chart.config
+//= require_tree .

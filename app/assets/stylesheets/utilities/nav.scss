@@ -1,0 +1,9 @@
+// This is not just for the nav in the header. It's a utility for any
+// UL that's intended to be used as a navigational list.
+
+.nav{
+  @include clearfix;
+}
+.nav li{
+  float: left
+}

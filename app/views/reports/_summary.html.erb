@@ -1,0 +1,30 @@
+<div class="summary">
+  <div class="container gridContainer">
+    <div class="subject">
+      <div class="subjectHeader">
+        <img src="https://placeholdit.imgix.net/~text?txtsize=28&txt=160%C3%97160&w=160&h=160">
+
+        <h2 class="summaryTitle">
+          Diversity Report For
+          <a href="#" class="subjectUsername"><%= report.subject %></a>
+        </h2>
+      </div>
+
+      <ul class="metaInfo">
+        <li><%= report.friends_count %></li>
+        <li><%= report.friends_in_report_percentage %></li>
+      </ul>
+
+      <a href="#" class="btn">Share Report</a>
+    </div>
+
+    <!-- Links to toggle the display of each graph get added here by JS. -->
+    <ul class="demographicKeys js-demographicKeys nav"></ul>
+
+    <div class="graphs">
+      <% report.graphs.each_with_index do |graph, index| %>
+        <%= render "reports/graph", graph: graph, index: index %>
+      <% end %>
+    </div>
+  </div>
+</div>
