@@ -1,0 +1,32 @@
+.btn{
+  display: inline-block;
+  background-color: $btnBackground;
+  color: #fff;
+  padding: 8px 12px;
+  font-size: 20px;
+  cursor: pointer;
+
+  // Undo browsers' native input styles
+  border: none;
+
+  &:hover{
+    background: saturate($btnBackground, 20%);
+  }
+}
+
+.btn--alt{
+  background-color: $btnAltBackground;
+
+  &:hover{
+    background: saturate($btnAltBackground, 20%);
+  }
+}
+
+.btn--full{
+  width: 100%;
+}
+
+
+.btn--big{
+  padding: 16px 24px;
+}

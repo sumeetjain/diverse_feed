@@ -30,7 +30,7 @@ class DemographicCollector
       add_to_info(row, "income")             { |v| v.to_i }
       add_to_info(row, "sexual_orientation") { |v| v }
       add_to_info(row, "religion")           { |v| v }
-      add_to_info(row, "ethnicity")        { |v| v }
+      add_to_info(row, "ethnicity")          { |v| v }
       add_to_info(row, "gender")             { |v| v }
       add_to_info(row, "year_of_birth")      { |v| v.to_i }
     end

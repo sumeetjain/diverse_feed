@@ -22,9 +22,21 @@ class Report < ActiveRecord::Base
 
   before_create :generate_report_details
 
+  # Returns a random Report.
+  def self.random
+    offset(random_offset).first
+  end
+
   # Checks to see if report has already been created within last 12 hours
   def self.recent_report(subject)
     where(subject: subject, updated_at: (Time.now - 12.hours)..Time.now).first
+  end
+
+  # Returns percentage of friends who make up this report.
+  def friends_in_report_percentage
+    percentage = (friends_in_report_count.to_f / friends_count.to_f).round(2)
+
+    (percentage > 2.0) ? percentage : "< 2"
   end
 
   private
@@ -58,9 +70,16 @@ class Report < ActiveRecord::Base
     self.friends_count           = twitter_service.friends_count(subject)
     self.friends_in_report_count = friend_user_ids.length
 
-    demographics                 = DemographicCollector.new(friend_user_ids)
-    frequency_map                = DemographicMapper.new(demographics.info)
-    self.demographics            = frequency_map.to_hash
+    if friends_in_report_count > 0
+      demographics                 = DemographicCollector.new(friend_user_ids)
+      frequency_map                = DemographicMapper.new(demographics.info)
+      self.demographics            = frequency_map.to_hash
+    end
+  end
+
+  # Returns a random Integer between 1 and the number of rows in 'reports'.
+  def self.random_offset
+    rand(count)
   end
 
 end

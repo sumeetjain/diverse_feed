@@ -87,6 +87,24 @@ RSpec.describe Report, type: :model do
 		end
 	end
 
+  describe '.random' do
+    it "gets a random report" do
+      # Setup
+      Report.destroy_all
+
+      Report.create(subject: "A", twitter_client: FakeTwitter.new)
+      Report.create(subject: "B", twitter_client: FakeTwitter.new)
+      Report.create(subject: "C", twitter_client: FakeTwitter.new)
+
+      # Stub the actual randomizer with a hard-coded value, so I can predict
+      # the result of Report.random.
+      expect(Report).to receive(:random_offset) { 1 }
+
+      # Exercise/Verify
+      expect(Report.random.subject).to eq("B")
+    end
+  end
+
   pending "cannot be generated if report subject follows fewer than 50 accounts total"
   pending "cannot be generated if report subject follows fewer than 10 accounts whose data is in our system"
 

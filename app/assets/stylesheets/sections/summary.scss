@@ -1,0 +1,88 @@
+.summary{
+  background-color: $summaryBackground;
+  padding: 20px 0;
+}
+
+.subject{
+  @include grid-column(5);
+}
+
+.demographicKeys{
+  @include grid-column(2);
+}
+
+.graphs{
+  @include grid-column(5);
+}
+
+.graph{
+  @include clearfix;
+}
+.graph.graph--isHidden{
+  display: none;
+}
+
+.subjectHeader{
+  @include clearfix;
+  margin-bottom: 12px;
+}
+
+.subjectHeader > img{
+  float: left;
+  width: 54px;
+  margin-right: 9px;
+}
+
+.summaryTitle{
+  float: left;
+  font-family: $sans-serif;
+  text-transform: uppercase;
+  color: lighten($defaultTextColor, 30%);
+}
+
+.subjectUsername{
+  display: block;
+  text-decoration: none;
+  font-family: $serif-2;
+  font-size: 32px;
+  margin-top: 6px;
+  margin-bottom: 9px;
+  text-transform: none;
+}
+
+.metaInfo{
+  color: lighten($defaultTextColor, 30%);
+
+  li {
+    margin-bottom: 6px;
+  }
+}
+
+.exhibit{
+  float: left;
+}
+.legend{
+  float: right;
+}
+
+.demographicKeys{
+  margin: 18px 0 30px;
+
+  li{
+    margin-bottom: 6px;
+  }
+
+  a{
+    display: inline-block;
+    padding: 4px 6px;
+    background: lighten($defaultTextColor, 20%);
+    text-transform: uppercase;
+    color: $demographicKeyColor;
+    margin-right: 9px;
+
+    &:hover{
+      background: $defaultTextColor;
+    }
+  }
+}
+
