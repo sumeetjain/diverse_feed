@@ -23,8 +23,4 @@ class Demographic < ActiveRecord::Base
     gender:             6,
     year_of_birth:      7
   }
-
-  def self.labels
-    keys.keys.map{ |k| k.to_sym }
-  end
 end
