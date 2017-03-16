@@ -18,6 +18,26 @@
         </fieldset>
 
         <fieldset class="profileSection">
+          <h3 class="profileSectionHeader">Year of Birth</h3>
+
+          <%= f.fields_for :year_of_birth do |yob_field| %>
+            <%= render "year_of_birth_fields", { f: yob_field } %>
+          <% end %>
+        </fieldset>
+
+        <fieldset class="profileSection">
+          <h3 class="profileSectionHeader">Gender</h3>
+
+          <%= f.fields_for :genders do |gender_field| %>
+            <%= render "gender_fields", { f: gender_field } %>
+          <% end %>
+
+          <div class="links">
+            <%= link_to_add_association 'Add Another Gender', f, :genders %>
+          </div>
+        </fieldset>
+
+        <fieldset class="profileSection">
           <h3 class="profileSectionHeader">Race</h3>
 
           <%= f.fields_for :races do |race_field| %>
@@ -30,19 +50,39 @@
         </fieldset>
 
         <fieldset class="profileSection">
+          <h3 class="profileSectionHeader">Ethnicity</h3>
+
+          <%= f.fields_for :ethnicities do |ethnicity_field| %>
+            <%= render "ethnicity_fields", { f: ethnicity_field } %>
+          <% end %>
+
+          <div class="links">
+            <%= link_to_add_association 'Add Another Ethnicity', f, :ethnicities %>
+          </div>
+        </fieldset>
+
+        <fieldset class="profileSection">
           <h3 class="profileSectionHeader">Sexual Orientation</h3>
 
-          <%= f.fields_for :sexual_orientation do |sexual_orientation_field| %>
+          <%= f.fields_for :sexual_orientations do |sexual_orientation_field| %>
             <%= render "sexual_orientation_fields", { f: sexual_orientation_field } %>
           <% end %>
+
+          <div class="links">
+            <%= link_to_add_association 'Add Another Sexual Orientation', f, :sexual_orientations %>
+          </div>
         </fieldset>
 
         <fieldset class="profileSection">
           <h3 class="profileSectionHeader">Religion</h3>
 
-          <%= f.fields_for :religion do |religion_field| %>
-                <%= render "religion_fields", {f: religion_field } %>
-              <% end %>
+          <%= f.fields_for :religions do |religion_field| %>
+            <%= render "religion_fields", {f: religion_field } %>
+          <% end %>
+
+          <div class="links">
+            <%= link_to_add_association 'Add Another Religion', f, :religions %>
+          </div>
         </fieldset>
 
         <%= f.submit "Save Profile", class: "btn btn--alt btn--full btn--big" %>

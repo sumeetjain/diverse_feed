@@ -21,24 +21,27 @@ class User < ActiveRecord::Base
 
   has_one :income, -> { where("key = ?",
     Demographic.keys[:income]) }, class_name: "Demographic"
+  has_one :year_of_birth, -> { where("key = ?",
+    Demographic.keys[:year_of_birth]) }, class_name: "Demographic"
+
   has_many :races, -> { where("key = ?",
     Demographic.keys[:race]) }, class_name: "Demographic"
   has_many :genders, -> { where("key = ?",
     Demographic.keys[:gender]) }, class_name: "Demographic"
   has_many :ethnicities, -> { where("key = ?",
     Demographic.keys[:ethnicity]) }, class_name: "Demographic"
-  has_one :sexual_orientation, -> { where("key = ?",
+  has_many :sexual_orientations, -> { where("key = ?",
     Demographic.keys[:sexual_orientation]) }, class_name: "Demographic"
-  has_one :religion, -> { where("key = ?",
+  has_many :religions, -> { where("key = ?",
     Demographic.keys[:religion]) }, class_name: "Demographic"
-  has_one :year_of_birth, -> { where("key = ?",
-    Demographic.keys[:year_of_birth]) }, class_name: "Demographic"
 
   accepts_nested_attributes_for :income, allow_destroy: true
   accepts_nested_attributes_for :year_of_birth, allow_destroy: true
-  accepts_nested_attributes_for :sexual_orientation, allow_destroy: true
-  accepts_nested_attributes_for :religion, allow_destroy: true
 
+  accepts_nested_attributes_for :sexual_orientations, allow_destroy: true,
+    reject_if: proc { |attrs| attrs['value'].blank? }
+  accepts_nested_attributes_for :religions, allow_destroy: true,
+    reject_if: proc { |attrs| attrs['value'].blank? }
   accepts_nested_attributes_for :races, allow_destroy: true,
     reject_if: proc { |attrs| attrs['value'].blank? }
   accepts_nested_attributes_for :genders, allow_destroy: true,
@@ -60,20 +63,6 @@ class User < ActiveRecord::Base
   # that is ready to be given a value for income.
   def income
     super || build_income
-  end
-
-  # Every user should have an sexual orientation as defined by the `has_one :sexual orientation`
-  # association, or if not they should have an unsaved Demographic object
-  # that is ready to be given a value for sexual orientation.
-  def sexual_orientation
-    super || build_sexual_orientation
-  end
-
-  # Every user should have an religion as defined by the `has_one :religion`
-  # association, or if not they should have an unsaved Demographic object
-  # that is ready to be given a value for religion.
-  def religion
-    super || build_religion
   end
 
   # Seed year of birth, if needed.

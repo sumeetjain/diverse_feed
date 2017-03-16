@@ -4,6 +4,10 @@ class ProfilesController < ApplicationController
   def show
     # TODO: Move this into the model.
     @user.races.build if @user.races.empty?
+    @user.ethnicities.build if @user.ethnicities.empty?
+    @user.genders.build if @user.genders.empty?
+    @user.sexual_orientations.build if @user.sexual_orientations.empty?
+    @user.religions.build if @user.religions.empty?
   end
 
   def update
@@ -27,10 +31,13 @@ class ProfilesController < ApplicationController
     demographic_attrs = [:id, :key, :value, :_destroy]
 
     params.require(:user).permit({
-      races_attributes: demographic_attrs,
       income_attributes: demographic_attrs,
-      sexual_orientation_attributes: demographic_attrs,
-      religion_attributes: demographic_attrs
+      year_of_birth_attributes: demographic_attrs,
+      sexual_orientations_attributes: demographic_attrs,
+      races_attributes: demographic_attrs,
+      ethnicities_attributes: demographic_attrs,
+      genders_attributes: demographic_attrs,
+      religions_attributes: demographic_attrs
     })
   end
 end
