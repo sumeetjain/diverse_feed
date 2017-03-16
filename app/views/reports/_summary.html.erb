@@ -17,14 +17,14 @@
     </div>
 
     <div class="graphs">
-        <% report.graphs.each_with_index do |graph, index| %>
-          <%= graph.render(index) %>
-        <% end %>
+      <% report.graphs.each_with_index do |graph, index| %>
+        <%= graph.render(index) %>
+      <% end %>
 
       <ul class="demographicKeys nav">
-        <% report.labels.each do |key| %>
-          <li><a href="#"><%= key %></a></li>
-        <% end %>
+        <%# report.labels.each do |key| %>
+          <!-- <li><a href="#" class="showGraphLink" data-><%# key %></a></li> -->
+        <%# end %>
       </ul>
 
       <a href="#" class="btn">View Full Report</a>
