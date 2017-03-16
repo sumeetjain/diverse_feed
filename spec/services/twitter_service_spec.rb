@@ -30,4 +30,14 @@ RSpec.describe TwitterService, type: :service do
       expect(twitter.friends_count("hul")).to eq(5)
     end
   end
+
+  describe '#avatar' do
+    it "gets the URL of a given user's avatar photo" do
+      asker = double(:asker, twitter_key: "key", twitter_secret: "secret")
+
+      twitter = TwitterService.new(asker: asker)
+
+      expect(twitter.avatar("hul")).to eq("http://twitter.com/example.jpg")
+    end
+  end
 end
