@@ -7,8 +7,12 @@
   @include grid-column(5);
 }
 
+.demographicKeys{
+  @include grid-column(2);
+}
+
 .graphs{
-  @include grid-column(7);
+  @include grid-column(5);
 }
 
 .graph{
@@ -63,16 +67,22 @@
 
 .demographicKeys{
   margin: 18px 0 30px;
-}
 
-.demographicKeys a{
-  padding: 4px 6px;
-  background: lighten($defaultTextColor, 20%);
-  text-transform: uppercase;
-  color: $demographicKeyColor;
-  margin-right: 9px;
+  li{
+    margin-bottom: 6px;
+  }
 
-  &:hover{
-    background: $defaultTextColor;
+  a{
+    display: inline-block;
+    padding: 4px 6px;
+    background: lighten($defaultTextColor, 20%);
+    text-transform: uppercase;
+    color: $demographicKeyColor;
+    margin-right: 9px;
+
+    &:hover{
+      background: $defaultTextColor;
+    }
   }
 }
+

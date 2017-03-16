@@ -14,17 +14,17 @@
         <li><%= report.friends_count %></li>
         <li><%= report.friends_in_report_percentage %></li>
       </ul>
+
+      <a href="#" class="btn">View Full Report</a>
     </div>
+
+    <!-- Links to toggle the display of each graph get added here by JS. -->
+    <ul class="demographicKeys nav"></ul>
 
     <div class="graphs">
       <% report.graphs.each_with_index do |graph, index| %>
         <%= render "reports/graph", graph: graph, index: index %>
       <% end %>
-
-      <!-- Links to toggle the display of each graph get added here by JS. -->
-      <ul class="demographicKeys nav"></ul>
-
-      <a href="#" class="btn">View Full Report</a>
     </div>
   </div>
 </div>
