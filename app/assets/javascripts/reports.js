@@ -7,4 +7,8 @@ window.addEventListener("load", function(e){
     var graph = new Graph(graphs[i]);
   }
 
+  // Automatically focus the text cursor inside the form.
+  var requestField = document.getElementsByClassName("reportSubjectField")[0]
+  requestField.focus();
+
 });

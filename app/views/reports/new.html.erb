@@ -1,6 +1,16 @@
-<%= form_for @report do |f| %>
-  <%= f.label :subject, "Whose diversity report do you want to generate?" %>
-  <%= f.text_field :subject %>
+<div class="container">
+  <h2 class="pageTitle">Get Diversity Report</h2>
 
-  <%= f.submit "View Diversity Report" %>
-<% end %>
+  <p class="featuredPara">Provide a Twitter user (e.g. "mayoredlee") to generate a diversity report for that user.</p>
+
+  <p class="featuredPara">The report is based upon the accounts that the Twitter user follows. In other words, the report will indicate how the diversity of sources whose tweets that person sees when they use Twitter.</p>
+
+  <hr>
+
+  <%= form_for @report do |f| %>
+    <%= f.label :subject, "Whose diversity report do you want to generate?", class: "pageSubtitle pageSubtitle--noUnderline" %>
+    <%= f.text_field :subject, class: "reportSubjectField", placeholder: "e.g. BarackObama or realDonaldTrump" %>
+
+    <%= f.submit "View Diversity Report", class: "btn btn--alt btn--full btn--big" %>
+  <% end %>
+</div>

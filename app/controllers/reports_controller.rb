@@ -1,6 +1,7 @@
 class ReportsController < ApplicationController
   def show
-    @report = Report.find(params[:id])
+    report = Report.find(params[:id])
+    @report = ReportPresenter.new(report)
   end
 
   def new
