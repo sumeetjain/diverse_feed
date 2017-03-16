@@ -44,4 +44,20 @@ RSpec.describe ReportPresenter, type: :presenter do
       expect(presenter.friends_in_report_percentage).to include("30")
     end
   end
+
+  describe '#profile_photo' do
+    it "gets the report subject's image URL" do
+      report = double(profile_photo: "http://example.com/x.jpg")
+      presenter = ReportPresenter.new(report)
+
+      expect(presenter.profile_photo).to eq("http://example.com/x.jpg")
+    end
+
+    it "returns a default image if the report subject has no avatar URL" do
+      report = double(profile_photo: nil)
+      presenter = ReportPresenter.new(report)
+
+      expect(presenter.profile_photo).to_not be_nil
+    end
+  end
 end

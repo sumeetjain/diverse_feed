@@ -1,5 +1,5 @@
 # This implements the API of whatever Twitter gem we're using. Essentially, any
-# time you see `client.something` in TwitterService, there should be a 
+# time you see `client.something` in TwitterService, there should be a
 # corresponding `def something...` in FakeTwitter that returns fake data in the
 # expected format. This way, TwitterService can easily be tested without
 # actually having to connect to Twitter.
@@ -11,7 +11,10 @@ class FakeTwitter
   end
 
   def user(subject)
-    OpenStruct.new(id: 10)
+    OpenStruct.new({
+      id: 10,
+      profile_image_url_https: "http://twitter.com/example.jpg"
+    })
   end
 
   def friends_count(subject)

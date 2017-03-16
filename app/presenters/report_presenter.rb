@@ -29,6 +29,11 @@ class ReportPresenter
     "Report based upon #{report.friends_in_report_percentage}% of accounts followed"
   end
 
+  # Returns String with the profile photo to show for this report's subject.
+  def profile_photo
+    @report.profile_photo || "egg.jpg"
+  end
+
   private
 
   # Returns an Array containing only those demographic keys (e.g. 'race',
