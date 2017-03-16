@@ -21,11 +21,8 @@
         <%= render "reports/graph", graph: graph, index: index %>
       <% end %>
 
-      <ul class="demographicKeys nav">
-        <%# report.labels.each do |key| %>
-          <!-- <li><a href="#" class="showGraphLink" data-><%# key %></a></li> -->
-        <%# end %>
-      </ul>
+      <!-- Links to toggle the display of each graph get added here by JS. -->
+      <ul class="demographicKeys nav"></ul>
 
       <a href="#" class="btn">View Full Report</a>
     </div>
