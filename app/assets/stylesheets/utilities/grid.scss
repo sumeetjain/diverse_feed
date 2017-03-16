@@ -1,0 +1,11 @@
+@import "neat";
+
+// Setting up the grid
+$neat-grid: (
+  columns: 12,
+  gutter: 0,
+);
+
+.gridContainer{
+  @include grid-container;
+}

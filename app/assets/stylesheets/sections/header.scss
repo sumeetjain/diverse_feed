@@ -1,0 +1,35 @@
+header{
+  background-color: $headerBackground;
+  padding:  10px 0;
+}
+
+header > .flexContainer{
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.titleLink{
+  flex-grow: 1;
+}
+
+.titleLink > a{
+  color: $titleColor;
+  font-family: $serif;
+  text-decoration: none;
+  font-size: 26px;
+}
+
+.siteNav li{
+  margin-left: 12px;
+}
+
+.siteNav a{
+  color: $navLinkColor;
+  font-family: $sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+  opacity: 0.9;
+
+  &:hover{
+    opacity: 1;
+  }
+}

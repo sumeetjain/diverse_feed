@@ -1,9 +1,3 @@
-<p><%= @report.subject %>'s (some random user) report info:</p>
+<%= render "reports/summary", {report: @report} if @report %>
 
-<% @report.demographics.each do |key, value| %>
-  <p>
-    <strong><%= key %></strong>
-
-    <%= value.to_s %>
-  </p>
-<% end %>
+<%= render "proposal" %>

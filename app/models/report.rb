@@ -32,6 +32,13 @@ class Report < ActiveRecord::Base
     where(subject: subject, updated_at: (Time.now - 12.hours)..Time.now).first
   end
 
+  # Returns percentage of friends who make up this report.
+  def friends_in_report_percentage
+    percentage = (friends_in_report_count.to_f / friends_count.to_f).round(2)
+
+    (percentage > 2.0) ? percentage : "< 2"
+  end
+
   private
 
   attr_reader :friend_twitter_ids, :friend_user_ids

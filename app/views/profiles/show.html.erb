@@ -1,41 +1,52 @@
-<%= form_for @user, url: :profile, method: :put do |f| %>
+<div class="profile">
+  <div class="container">
+    <p class="pageTitle">We're grateful you're participating!</p>
 
-  <fieldset>
-    Income<br>
+    <p class="featuredPara">Please answer the questions below to provide our project with your demographic information. All of the information is being collected securely, and we will never publicly connect your identity with the information you provide.</p>
 
-    <%= f.fields_for :income do |income_field| %>
-      <%= render "income_fields", { f: income_field } %>
-    <% end %>
-  </fieldset>
+    <div class="demographicSurvey">
+      <h2 class="pageSubtitle">Demographic Survey</h2>
 
-  <fieldset>
-    Race<br>
+      <%= form_for @user, url: :profile, method: :put do |f| %>
 
-    <%= f.fields_for :races do |race_field| %>
-      <%= render "race_fields", { f: race_field } %>
-    <% end %>
+        <fieldset class="profileSection">
+          <h3 class="profileSectionHeader">Income</h3>
 
-    <div class="links">
-      <%= link_to_add_association 'Add', f, :races %>
+          <%= f.fields_for :income do |income_field| %>
+            <%= render "income_fields", { f: income_field } %>
+          <% end %>
+        </fieldset>
+
+        <fieldset class="profileSection">
+          <h3 class="profileSectionHeader">Race</h3>
+
+          <%= f.fields_for :races do |race_field| %>
+            <%= render "race_fields", { f: race_field } %>
+          <% end %>
+
+          <div class="links">
+            <%= link_to_add_association 'Add Another Race', f, :races %>
+          </div>
+        </fieldset>
+
+        <fieldset class="profileSection">
+          <h3 class="profileSectionHeader">Sexual Orientation</h3>
+
+          <%= f.fields_for :sexual_orientation do |sexual_orientation_field| %>
+            <%= render "sexual_orientation_fields", { f: sexual_orientation_field } %>
+          <% end %>
+        </fieldset>
+
+        <fieldset class="profileSection">
+          <h3 class="profileSectionHeader">Religion</h3>
+
+          <%= f.fields_for :religion do |religion_field| %>
+                <%= render "religion_fields", {f: religion_field } %>
+              <% end %>
+        </fieldset>
+
+        <%= f.submit "Save Profile", class: "btn btn--alt btn--full btn--big" %>
+      <% end %>
     </div>
-  </fieldset>
-
-  <fieldset>
-    Sexual Orientation<br>
-
-    <%= f.fields_for :sexual_orientation do |sexual_orientation_field| %>
-      <%= render "sexual_orientation_fields", { f: sexual_orientation_field } %>
-    <% end %>
-  </fieldset>
-
-
-  <fieldset>
-    Religion<br>
-
-    <%= f.fields_for :religion do |religion_field| %>
-      <%= render "religion_fields", {f: religion_field } %>
-    <% end %>
-  </fieldset>
-
-  <%= f.submit "Save Profile" %>
-<% end %>
+  </div>
+</div>
