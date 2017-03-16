@@ -24,8 +24,7 @@ class Report < ActiveRecord::Base
 
   # Returns a random Report.
   def self.random
-    # offset(random_offset).first
-    find_by_subject("holman")
+    offset(random_offset).first
   end
 
   # Checks to see if report has already been created within last 12 hours
