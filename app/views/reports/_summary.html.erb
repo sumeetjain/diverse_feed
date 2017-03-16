@@ -6,37 +6,23 @@
 
         <h2 class="summaryTitle">
           Diversity Report For
-          <a href="#" class="subjectUsername">@<%= report.subject %></a>
+          <a href="#" class="subjectUsername"><%= report.subject %></a>
         </h2>
       </div>
 
       <ul class="metaInfo">
-        <li>Follows <%= report.friends_count %> accounts</li>
-        <li>Report based upon <%= report.friends_in_report_percentage %>% of accounts followed</li>
+        <li><%= report.friends_count %></li>
+        <li><%= report.friends_in_report_percentage %></li>
       </ul>
     </div>
 
     <div class="graphs">
-      <div class="graph">
-        <div class="exhibit">
-          <img src="https://placeholdit.imgix.net/~text?txtsize=28&txt=300%C3%97300&w=300&h=300">
-
-          <% report.demographics.each do |key, value| %>
-            <!-- <p>
-              <strong><%= key %></strong>
-
-              <%= value.to_s %>
-            </p> -->
-          <% end %>
-        </div>
-
-        <div class="legend">
-          Legend
-        </div>
-      </div>
+        <% report.graphs.each do |graph| %>
+          <%= graph.render %>
+        <% end %>
 
       <ul class="demographicKeys nav">
-        <% report.demographics.keys.each do |key| %>
+        <% report.labels.each do |key| %>
           <li><a href="#"><%= key %></a></li>
         <% end %>
       </ul>

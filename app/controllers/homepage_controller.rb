@@ -1,5 +1,5 @@
 class HomepageController < ApplicationController
   def show
-    @report = Report.random
+    @report = ReportPresenter.new(Report.random, view_context)
   end
 end
