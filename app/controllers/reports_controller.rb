@@ -5,7 +5,12 @@ class ReportsController < ApplicationController
   end
 
   def new
-    @report = current_user.reports.build
+    if current_user
+      @report = current_user.reports.build
+    else
+      session[:return_to] = new_report_url
+      redirect_to "/login"
+    end
   end
 
   def create
