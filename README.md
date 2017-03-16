@@ -132,3 +132,11 @@ You can add any additional styling to containers as well as columns:
 - Separate layout vs. formatting concerns into different styles
 - Avoid depending on impermanent HTML tags/ordering/structure in CSS selectors (e.g. `.title a` is probably okay, but `ul div` or `h4 a` are too prone to change)
 - Avoid CSS cleverness. If you find yourself hunting for an obscure selector, consider whether the CSS would be more maintainable if you just added a class that expressed your intention instead.
+- Use `camelCase` for CSS classes.
+- Use `--` to indicate a [modifier class](http://getbem.com/naming/), e.g. `.nav--current` modifies `.nav`.
+
+### JavaScript Guidelines
+
+- Never select elements using a class which might have CSS applied to it.
+  + To guarantee this, add a new class to elements you want to select. Prefix that class with `js-` (e.g. `js-navLink` is a new class you might add to an element that already has the `navLink` class). Then just do `document.getElementsByClassName("js-navLink")`.
+- Never define styles for a class beginning with `js-` in a stylesheet.

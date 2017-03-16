@@ -9,7 +9,7 @@
 // Creates a new Graph.
 //
 // element - DOM element matching the following spec (example):
-//             class="graph"
+//             class="js-graph"
 //             data-graph-id="race"
 //             data-graph-index="0"
 //             data-graph-labels="['Black / African-American', 'White']"
@@ -20,7 +20,7 @@
 //
 //           Example (attributes' values omitted for ease of reading):
 //
-//             <div class="graph"
+//             <div class="js-graph"
 //               data-graph-id="" data-graph-index=""
 //               data-graph-labels="" data-graph-values="">
 //
@@ -74,18 +74,19 @@ var Graph = function(element){
 // When a user clicks on this link, it will show this graph.
 Graph.prototype.addSwitcherLink = function() {
   var graph = this;
-  var linksContainer = document.getElementsByClassName("demographicKeys")[0];
 
-  var linkHTML  = '<a href="#" class="showGraphLink">';
-      linkHTML += this.id;
-      linkHTML += '</a>';
+  var link = document.createElement("a");
+  link.setAttribute("href", "#");
+  link.classList.add("showGraphLink");
+  link.appendChild(document.createTextNode(this.id))
 
-  var link = $(linkHTML);
-  var li   = $("<li></li>");
-  $(li).append(link);
-  $(linksContainer).prepend(li);
+  var li = document.createElement("li");
+  li.appendChild(link);
 
-  link.on("click", function(e){
+  var linksUL = document.getElementsByClassName("js-demographicKeys")[0];
+  linksUL.insertBefore(li, linksUL.children[0]);
+
+  link.addEventListener("click", function(e){
     graph.show();
   })
 };
@@ -113,7 +114,7 @@ Graph.prototype.generate = function() {
 Graph.prototype.show = function() {
   this.hidden = false;
   this.hideAll();
-  this.element.classList.remove("graph--hidden");
+  this.element.classList.remove("graph--isHidden");
 
   if (!this.generated){
     this.generate();
@@ -123,7 +124,7 @@ Graph.prototype.show = function() {
 // Hide only this graph.
 Graph.prototype.hide = function() {
   this.hidden = true;
-  this.element.classList.add("graph--hidden");
+  this.element.classList.add("graph--isHidden");
 };
 
 // Hide all graphs.
