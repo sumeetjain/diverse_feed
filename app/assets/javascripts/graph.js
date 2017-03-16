@@ -98,7 +98,8 @@ Graph.prototype.generate = function() {
       labels: this.labels,
       datasets: [{
         label: 'TODO: Graph Label Goes Here',
-        data: this.values
+        data: this.values,
+        backgroundColor: window.graphSectionColors
       }]
     },
     options: {
@@ -132,5 +133,21 @@ Graph.prototype.hideAll = function() {
   }
 };
 
+// ----------------------------------------------------------------------------
+
 // Collects all the Graphs that are created on a page.
 window.graphs = [];
+
+// Set colors for graph sections (i.e. pie pieces).
+window.graphSectionColors = [
+  "#ECD078",
+  "#D95B43",
+  "#C02942",
+  "#542437",
+  "#53777A",
+  "#6AEBBA",
+  "#CE1FC8",
+  "#1E30B3",
+  "#32431B",
+  "#664055",
+]
