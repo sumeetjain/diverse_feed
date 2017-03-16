@@ -1,17 +1,15 @@
-class ReportPresenter
-  attr_reader :report, :labels
+# Prepares information from a Report record for the view.
 
-  def initialize(report, view_context)
+class ReportPresenter
+  attr_reader :report
+
+  # report - Report to present to the view.
+  def initialize(report)
     @report = report
-    @labels = report.labels
-    @view_context = view_context
-    @first_graph = true
   end
 
   def graphs
-    @labels.map do |key, foo|
-      GraphPresenter.new(key, @report.demographics[key], @view_context)
-    end
+    labels.map { |key| GraphPresenter.new(key, @report.demographics[key]) }
   end
 
   def subject
@@ -28,12 +26,7 @@ class ReportPresenter
 
   private
 
-  def first_graph?
-    if @first_graph == true
-      true
-    else
-      @first_graph = false
-      false
-    end
+  def labels
+    @report.demographics.map { |key, values| key if !values.blank? }.compact
   end
 end

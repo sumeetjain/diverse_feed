@@ -40,10 +40,6 @@ class Report < ActiveRecord::Base
     (percentage > 2.0) ? percentage : "< 2"
   end
 
-  def labels
-    demographics.map { |key, values| key if !values.blank? }.compact
-  end
-
   private
 
   attr_reader :friend_twitter_ids, :friend_user_ids
