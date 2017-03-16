@@ -83,7 +83,7 @@ Graph.prototype.addSwitcherLink = function() {
   var link = $(linkHTML);
   var li   = $("<li></li>");
   $(li).append(link);
-  $(linksContainer).append(li);
+  $(linksContainer).prepend(li);
 
   link.on("click", function(e){
     graph.show();
