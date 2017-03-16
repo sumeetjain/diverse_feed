@@ -1,22 +1,5 @@
-<div class="graph" data-graph-id="<%= graph.id %>">
+<div class="graph" data-graph-id="<%= graph.id %>" data-graph-index="<%= graph.index %>" data-graph-labels="<%= graph.labels %>" data-graph-values="<%= graph.values %>">
   <div class="exhibit">
     <canvas id="graph_<%= graph.id %>" width="400" height="400"></canvas>
-    <script>
-      Chart.defaults.global.legend.position = "right";
-
-      var element_<%= graph.id %> = document.getElementById("graph_<%= graph.id %>");
-      var chart_<%= graph.id %> = new Chart(element_<%= graph.id %>, {
-        type: 'pie',
-        data: {
-          labels: <%= graph.labels %>,
-          datasets: [{
-            label: '<%= graph.label %>',
-            data: <%= graph.values %>
-          }]
-        },
-        options: {
-        }
-      });
-    </script>
   </div>
 </div>

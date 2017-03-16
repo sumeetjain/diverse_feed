@@ -17,8 +17,8 @@
     </div>
 
     <div class="graphs">
-        <% report.graphs.each do |graph| %>
-          <%= graph.render %>
+        <% report.graphs.each_with_index do |graph, index| %>
+          <%= graph.render(index) %>
         <% end %>
 
       <ul class="demographicKeys nav">

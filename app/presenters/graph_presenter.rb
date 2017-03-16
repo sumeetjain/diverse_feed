@@ -1,5 +1,5 @@
 class GraphPresenter
-  attr_reader :id
+  attr_reader :id, :index
 
   def initialize(id, demographic_data, view_context)
     @id = id.to_s
@@ -7,16 +7,17 @@ class GraphPresenter
     @h = view_context
   end
 
-  def render
+  def render(index)
+    @index = index
     @h.render("reports/graph", graph: self)
   end
 
   def labels
-    @h.raw @demographic_data.keys
+    @demographic_data.keys.to_json
   end
 
   def values
-    @h.raw @demographic_data.values
+    @demographic_data.values.to_json
   end
 
   def label

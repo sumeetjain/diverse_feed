@@ -1,2 +1,10 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
+window.addEventListener("load", function(e){
+
+  // Find all graphs on the page, and initialize them
+  // according to the Graph class.
+  var graphs = document.getElementsByClassName("graph");
+  for (var i = graphs.length - 1; i >= 0; i--) {
+    var graph = new Graph(graphs[i]);
+  }
+
+});
