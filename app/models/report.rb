@@ -11,6 +11,7 @@
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  twitter_id              :integer
+#  profile_photo           :text
 #
 
 class Report < ActiveRecord::Base
@@ -74,6 +75,7 @@ class Report < ActiveRecord::Base
       demographics                 = DemographicCollector.new(friend_user_ids)
       frequency_map                = DemographicMapper.new(demographics.info)
       self.demographics            = frequency_map.to_hash
+      self.profile_photo           = twitter_service.avatar(subject)
     end
   end
 

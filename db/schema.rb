@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170315233056) do
+ActiveRecord::Schema.define(version: 20170316224804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20170315233056) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.integer  "twitter_id"
+    t.text     "profile_photo"
   end
 
   add_index "reports", ["subject"], name: "index_reports_on_subject", using: :btree

@@ -11,6 +11,7 @@
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  twitter_id              :integer
+#  profile_photo           :text
 #
 
 require 'rails_helper'
