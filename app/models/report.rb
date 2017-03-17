@@ -16,12 +16,36 @@
 
 class Report < ActiveRecord::Base
   attr_writer :twitter_client
+  attr_accessor :fetched_friends
 
   belongs_to :asker, class_name: "User", foreign_key: "user_id"
 
   serialize :demographics, Hash
 
+  validates :friends_in_report_count,
+    numericality: {
+      greater_than: 9,
+
+      # object = person object being validated
+      # data = { model: "Person", attribute: "Username", value: <username> }
+      message: -> (object, data) do
+        "Only #{data[:value]} of the accounts this person follows have provided demographic information to us. Unfortunately, that's not enough for us to build a meaningful report. Please try again some time in the future, when hopefully more of them will have participated in this project."
+      end
+    },
+    if: :fetched_friends
+
+  before_validation :fetch_friends
   before_create :generate_report_details
+
+  def fetch_friends
+    begin
+      self.friends_count           = twitter_service.friends_count(subject)
+      self.friends_in_report_count = friend_user_ids.length
+      self.fetched_friends = true
+    rescue Twitter::Error => error
+      errors.add(:twitter, "only allows for a handful of requests per user at a time. Please try again in ~10 minutes.") and :abort
+    end
+  end
 
   # Returns a random Report.
   def self.random
@@ -42,8 +66,6 @@ class Report < ActiveRecord::Base
   end
 
   private
-
-  attr_reader :friend_twitter_ids, :friend_user_ids
 
   # Initializes TwitterService.
   def twitter_service
@@ -69,15 +91,10 @@ class Report < ActiveRecord::Base
 
   # Sets report details.
   def generate_report_details
-    self.friends_count           = twitter_service.friends_count(subject)
-    self.friends_in_report_count = friend_user_ids.length
-
-    if friends_in_report_count > 0
-      demographics                 = DemographicCollector.new(friend_user_ids)
-      frequency_map                = DemographicMapper.new(demographics.info)
-      self.demographics            = frequency_map.to_hash
-      self.profile_photo           = twitter_service.avatar(subject)
-    end
+    demographics       = DemographicCollector.new(friend_user_ids)
+    frequency_map      = DemographicMapper.new(demographics.info)
+    self.demographics  = frequency_map.to_hash
+    self.profile_photo = twitter_service.avatar(subject)
   end
 
   # Returns a random Integer between 1 and the number of rows in 'reports'.

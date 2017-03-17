@@ -105,9 +105,4 @@ RSpec.describe Report, type: :model do
       expect(Report.random.subject).to eq("B")
     end
   end
-
-  pending "cannot be generated if report subject follows fewer than 50 accounts total"
-  pending "cannot be generated if report subject follows fewer than 10 accounts whose data is in our system"
-
-  pending "has a count of how many accounts comprise report data"
 end

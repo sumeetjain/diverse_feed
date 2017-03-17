@@ -8,6 +8,8 @@
   <hr>
 
   <%= form_for @report do |f| %>
+    <%= render "layouts/errors", errors: @report.errors %>
+
     <%= f.label :subject, "Whose diversity report do you want to generate?", class: "pageSubtitle pageSubtitle--noUnderline" %>
     <%= f.text_field :subject, class: "reportSubjectField js-reportSubject", placeholder: "e.g. BarackObama or realDonaldTrump" %>
 
