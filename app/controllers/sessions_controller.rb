@@ -4,7 +4,10 @@ class SessionsController < ApplicationController
     session[:user_id] = user.id
 
     if session[:return_to]
-      redirect_to session[:return_to]
+      return_path = session[:return_to]
+      session[:return_to] = nil
+
+      redirect_to return_path
     else
       redirect_to :profile, notice: "Welcome!"
     end

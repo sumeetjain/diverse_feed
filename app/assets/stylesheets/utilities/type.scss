@@ -7,6 +7,12 @@ $sans-serif: 'Merriweather Sans', sans-serif;
   text-align: center;
   font-family: $serif;
   margin: 30px 0 18px;
+
+  &.pageTitle--highlight{
+    background-color: $pageTitleHighlight;
+    display: inline-block;
+    padding: 5px 24px;
+  }
 }
 
 .pageSubtitle{
@@ -24,6 +30,10 @@ $sans-serif: 'Merriweather Sans', sans-serif;
   font-size: 18px;
   font-family: $serif-2;
   margin-bottom: 24px;
+
+  &.featuredPara--center{
+    text-align: center;
+  }
 }
 
 hr{

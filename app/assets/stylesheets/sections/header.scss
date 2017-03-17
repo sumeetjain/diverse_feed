@@ -33,3 +33,39 @@ header > .flexContainer{
     opacity: 1;
   }
 }
+
+.explainer{
+  text-align: center;
+  background-color: $explainerBackground;
+  padding: 10px 0 45px;
+}
+
+.explainerHighlight{
+  color: $explainerTextHighlightColor;
+}
+
+.explainerShadow{
+  text-shadow: 1px 1px darken($explainerBackground, 30%);
+}
+.explainerDarkShadow{
+  text-shadow: 1px 1px darken($explainerBackground, 50%);
+}
+
+.explainerIntroCTAs{
+}
+
+.explainerCTAs{
+  margin-top: 12px;
+
+  li{
+    display: inline-block;
+    margin: 0 10px;
+  }
+}
+
+.homepageSummaryIntro{
+  padding: 16px 0;
+  margin-bottom: 16px;
+  border-bottom: 1px dashed $explainerBackground;
+  text-align: center;
+}

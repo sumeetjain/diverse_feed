@@ -1,3 +1,31 @@
+<div class="explainer">
+  <div class="container">
+    <p class="pageTitle explainerHighlight explainerDarkShadow">See whose voices are [not] part of your Twitter stream.</p>
+
+    <p class="featuredPara featuredPara--center explainerHighlight explainerShadow">
+      <strong>Diverse Feed</strong> is a research project intended
+      to help reveal blind spots&mdash;either our own
+      <br>or those of people that we expect to be well-informed.
+    </p>
+
+    <p class="explainerIntroCTAs">
+      Participate by securely sharing your own demographic information,<br>
+      or run a report on yourself (or anyone else).
+    </p>
+
+    <ul class="explainerCTAs">
+      <li><%= link_to "Get a Report", :new_report, class: "btn" %></li>
+      <li><%= link_to "Participate", :profile, class: "btn" %></li>
+    </ul>
+  </div>
+</div>
+
+<div class="homepageSummaryIntro">
+  <div class="container">
+    <p>Here's a real, live report example:</p>
+  </div>
+</div>
+
 <%= render "reports/summary", {report: @report} if @report %>
 
 <%= render "proposal" %>

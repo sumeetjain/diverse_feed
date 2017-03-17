@@ -2,12 +2,17 @@ class ProfilesController < ApplicationController
   before_filter :set_profile
 
   def show
-    # TODO: Move this into the model.
-    @user.races.build if @user.races.empty?
-    @user.ethnicities.build if @user.ethnicities.empty?
-    @user.genders.build if @user.genders.empty?
-    @user.sexual_orientations.build if @user.sexual_orientations.empty?
-    @user.religions.build if @user.religions.empty?
+    if current_user
+      # TODO: Move this into the model.
+      @user.races.build if @user.races.empty?
+      @user.ethnicities.build if @user.ethnicities.empty?
+      @user.genders.build if @user.genders.empty?
+      @user.sexual_orientations.build if @user.sexual_orientations.empty?
+      @user.religions.build if @user.religions.empty?
+    else
+      session[:return_to] = profile_url
+      redirect_to "/login"
+    end
   end
 
   def update
