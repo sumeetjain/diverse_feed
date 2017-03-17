@@ -42,8 +42,10 @@ class Report < ActiveRecord::Base
       self.friends_count           = twitter_service.friends_count(subject)
       self.friends_in_report_count = friend_user_ids.length
       self.fetched_friends = true
-    rescue Twitter::Error => error
+    rescue Twitter::Error::TooManyRequests => error
       errors.add(:twitter, "only allows for a handful of requests per user at a time. Please try again in ~10 minutes.") and :abort
+    rescue Twitter::Error::Unauthorized => error
+      errors.add(:twitter, "won't allow us to view whom @#{subject} follows, so we can't run their report.") and :abort
     end
   end
 
