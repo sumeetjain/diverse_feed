@@ -36,8 +36,9 @@ class Report < ActiveRecord::Base
   # Returns percentage of friends who make up this report.
   def friends_in_report_percentage
     percentage = (friends_in_report_count.to_f / friends_count.to_f).round(2)
+    percentage = percentage * 100
 
-    (percentage > 2.0) ? percentage : "< 2"
+    (percentage > 2.0) ? percentage.to_i : "< 2"
   end
 
   private
