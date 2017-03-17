@@ -22,11 +22,13 @@ CSV.foreach(Rails.root.join('lib', 'seeds.csv'), {headers: true}) do |row|
       key: :year_of_birth,
       value: row["year_of_birth"]) if !row["year_of_birth"].blank?
 
-    ethnicities = row["ethnicities"].split(",").map { |e| e.strip }
+    unless row["ethnicities"].blank?
+      ethnicities = row["ethnicities"].split(",").map { |e| e.strip }
 
-    ethnicities.each { |ethnicity| user.ethnicities.build(
-      key: :ethnicity,
-      value: ethnicity) }
+      ethnicities.each { |ethnicity| user.ethnicities.build(
+        key: :ethnicity,
+        value: ethnicity) }
+    end
 
     user.save!
     puts "Created user: #{user.inspect} - #{user.demographics.select(:key, :value).inspect}"
