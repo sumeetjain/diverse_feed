@@ -17,6 +17,8 @@ class DemographicCollector
   ]
 
   def initialize(ids)
+    raise "No user IDs, so cannot collect demographic data." if ids.empty?
+
     @ids = ids
     build_info_hash
   end

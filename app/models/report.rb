@@ -22,26 +22,26 @@ class Report < ActiveRecord::Base
 
   serialize :demographics, Hash
 
-  validates :friends_in_report_count,
-    numericality: {
-      greater_than: 9,
+  # validates :friends_in_report_count,
+  #   numericality: {
+  #     greater_than: 9,
 
-      # object = person object being validated
-      # data = { model: "Person", attribute: "Username", value: <username> }
-      message: -> (object, data) do
-        "Only #{data[:value].to_i} of the accounts this person follows have provided demographic information to us. Unfortunately, that's not enough for us to build a meaningful report. Please try again some time in the future, when hopefully more of them will have participated in this project."
-      end
-    },
-    if: :fetched_friends
+  #     # object = person object being validated
+  #     # data = { model: "Person", attribute: "Username", value: <username> }
+  #     message: -> (object, data) do
+  #       "Only #{data[:value].to_i} of the accounts this person follows have provided demographic information to us. Unfortunately, that's not enough for us to build a meaningful report. Please try again some time in the future, when hopefully more of them will have participated in this project."
+  #     end
+  #   },
+  #   if: :fetched_friends
 
-    validates :subject, presence: true
+    # validates :subject, presence: true
 
   before_validation :fetch_friends
   before_create :generate_report_details
 
-  def subject=(input)
-    @subject = input.gsub("@", "").gsub(/https?:\/\/.*\//, "")
-  end
+  # def subject=(input)
+  #   @subject = input.gsub("@", "").gsub(/https?:\/\/.*\//, "")
+  # end
 
   def fetch_friends
     begin

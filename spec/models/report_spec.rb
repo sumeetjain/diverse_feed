@@ -44,7 +44,7 @@ RSpec.describe Report, type: :model do
       ])
 
       @report = Report.new(subject: "hul", twitter_client: FakeTwitter.new)
-      @report.save
+      @report.save!
 
       @report2 = Report.new(subject: "sumeetjain", twitter_client: FakeTwitter.new, updated_at: Time.now - 24.hours)
       @report2.save
