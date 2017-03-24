@@ -43,17 +43,7 @@ class Report < ActiveRecord::Base
   #   @subject = input.gsub("@", "").gsub(/https?:\/\/.*\//, "")
   # end
 
-  def fetch_friends
-    begin
-      self.friends_count           = twitter_service.friends_count(subject)
-      self.friends_in_report_count = friend_user_ids.length
-      self.fetched_friends = true
-    rescue Twitter::Error::TooManyRequests => error
-      errors.add(:twitter, "only allows for a handful of requests per user at a time. Please try again in ~10 minutes.") and :abort
-    rescue Twitter::Error::Unauthorized => error
-      errors.add(:twitter, "won't allow us to view whom @#{subject} follows, so we can't run their report.") and :abort
-    end
-  end
+
 
   # Returns a random Report.
   def self.random
@@ -99,15 +89,30 @@ class Report < ActiveRecord::Base
 
   # Sets report details.
   def generate_report_details
-    demographics       = DemographicCollector.new(friend_user_ids)
-    frequency_map      = DemographicMapper.new(demographics.info)
-    self.demographics  = frequency_map.to_hash
-    self.profile_photo = twitter_service.avatar(subject)
+    if friend_user_ids.any?
+      demographics       = DemographicCollector.new(friend_user_ids)
+      frequency_map      = DemographicMapper.new(demographics.info)
+      self.demographics  = frequency_map.to_hash
+      self.profile_photo = twitter_service.avatar(subject)
+    end
   end
 
   # Returns a random Integer between 1 and the number of rows in 'reports'.
   def self.random_offset
     rand(count)
+  end
+
+  # Connects to Twitter and  gets information about the subject's friends.
+  def fetch_friends
+    begin
+      self.friends_count           = twitter_service.friends_count(subject)
+      self.friends_in_report_count = friend_user_ids.length
+      self.fetched_friends = true
+    rescue Twitter::Error::TooManyRequests => error
+      errors.add(:twitter, I18n.t("twitter_errors.too_many_requests")) and :abort
+    rescue Twitter::Error::Unauthorized => error
+      errors.add(:twitter, I18n.t("twitter_errors.unauthorized")) and :abort
+    end
   end
 
 end

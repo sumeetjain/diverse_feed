@@ -6,8 +6,12 @@
 
 class FakeTwitter
   def friend_ids(subject)
-    attrs = {ids: [1, 2, 3, 4, 5]}
-    OpenStruct.new(attrs: attrs)
+    if subject == "private"
+      raise Twitter::Error::Unauthorized
+    else
+      attrs = {ids: [1, 2, 3, 4, 5]}
+      OpenStruct.new(attrs: attrs)
+    end
   end
 
   def user(subject)
@@ -19,5 +23,17 @@ class FakeTwitter
 
   def friends_count(subject)
     subject_friend_ids(subject).length
+  end
+
+  class TooManyRequests
+    def method_missing(method, args)
+      raise Twitter::Error::TooManyRequests
+    end
+  end
+
+  class Unauthorized
+    def method_missing(method, args)
+      raise Twitter::Error::Unauthorized
+    end
   end
 end

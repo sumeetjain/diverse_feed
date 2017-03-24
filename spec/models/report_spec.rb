@@ -51,6 +51,28 @@ RSpec.describe Report, type: :model do
     end
 
     describe '#create' do
+      context "when subject is a private user" do
+        it "sets report as invalid and populates error message" do
+          report = Report.create(subject: "private", twitter_client: FakeTwitter::Unauthorized.new)
+
+          error_text = I18n.t("twitter_errors.unauthorized")
+
+          expect(report.errors.messages).to include(:twitter)
+          expect(report.errors.messages[:twitter]).to include(error_text)
+        end
+      end
+
+      context "when API rate limit is exceeded" do
+        it "sets report as invalid and populates error message" do
+          report = Report.create(subject: "private", twitter_client: FakeTwitter::TooManyRequests.new)
+
+          error_text = I18n.t("twitter_errors.too_many_requests")
+
+          expect(report.errors.messages).to include(:twitter)
+          expect(report.errors.messages[:twitter]).to include(error_text)
+        end
+      end
+
       it "sets friends_count" do
         expect(@report.friends_count).to eq(5)
       end
