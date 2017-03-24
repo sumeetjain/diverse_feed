@@ -34,8 +34,14 @@ class Report < ActiveRecord::Base
     },
     if: :fetched_friends
 
+    validates :subject, presence: true
+
   before_validation :fetch_friends
   before_create :generate_report_details
+
+  def subject=(input)
+    @subject = input.gsub("@", "").gsub(/https?:\/\/.*\//, "")
+  end
 
   def fetch_friends
     begin
