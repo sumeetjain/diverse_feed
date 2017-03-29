@@ -25,8 +25,8 @@ class ReportPresenter
 
   # Returns a String indicating how many of the subject's friends we have
   # demographic data for.
-  def friends_in_report_percentage
-    "Report based upon #{report.friends_in_report_percentage}% of accounts followed"
+  def friends_in_report
+    "Report based upon #{friends_in_report_percentage}% of accounts followed"
   end
 
   # Returns String with the profile photo to show for this report's subject.
@@ -40,5 +40,13 @@ class ReportPresenter
   # 'gender') for which there is actually information to show.
   def labels
     @report.demographics.map { |key, values| key if !values.blank? }.compact
+  end
+
+  # Returns percentage of friends who make up this report.
+  def friends_in_report_percentage
+    percentage = (@report.friends_in_report_count.to_f / @report.friends_count.to_f).round(2)
+    percentage = percentage * 100
+
+    (percentage > 2.0) ? percentage.to_i : "< 2"
   end
 end

@@ -23,25 +23,12 @@ RSpec.describe ReportPresenter, type: :presenter do
     end
   end
 
-  describe '#friends_in_report_percentage' do
+  describe '#friends_in_report' do
     it "indicates how many of the subject's friends are in the report" do
-      report = double
-      expect(report).to receive(:friends_in_report_percentage) { 30 }
+      presenter = ReportPresenter.new(double)
+      expect(presenter).to receive(:friends_in_report_percentage) { 30 }
 
-      presenter = ReportPresenter.new(report)
-
-      expect(presenter.friends_in_report_percentage).to include("30")
-    end
-  end
-
-  describe '#graphs' do
-    it "indicates how many of the subject's friends are in the report" do
-      report = double
-      expect(report).to receive(:friends_in_report_percentage) { 30 }
-
-      presenter = ReportPresenter.new(report)
-
-      expect(presenter.friends_in_report_percentage).to include("30")
+      expect(presenter.friends_in_report).to include("30")
     end
   end
 
