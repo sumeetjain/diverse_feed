@@ -36,6 +36,7 @@ class Report < ActiveRecord::Base
 
   before_validation :fetch_friends
   before_create :generate_report_details
+  before_create :set_profile_photo
 
   # Removes extraneous information from the username.
   #
@@ -83,12 +84,11 @@ class Report < ActiveRecord::Base
 
   # Sets report details.
   def generate_report_details
-    if friend_user_ids.any?
-      demographics       = DemographicCollector.new(friend_user_ids)
-      frequency_map      = DemographicMapper.new(demographics.info)
-      self.demographics  = frequency_map.to_hash
-      self.profile_photo = twitter_service.avatar(subject)
-    end
+    self.demographics = ReportGenerator.run(friend_user_ids)
+  end
+
+  def set_profile_photo
+    self.profile_photo = @twitter_service.avatar(subject)
   end
 
   # Returns a random Integer between 1 and the number of rows in 'reports'.
