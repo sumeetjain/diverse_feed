@@ -49,6 +49,11 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :ethnicities, allow_destroy: true,
     reject_if: proc { |attrs| attrs['value'].blank? }
 
+  # Get our users' IDs from a set of Twitter IDs.
+  #
+  # Returns an ActiveRecord::Relation containing the users' IDs.
+  scope :convert_twitter_ids, -> (ids) { select(:id).where(twitter_id: ids).pluck(:id) }
+
   # Initialize a User from the OAuth flow.
   #
   # auth_hash - Hash containing the Twitter OAuth response.
