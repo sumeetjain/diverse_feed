@@ -47,10 +47,52 @@ RSpec.describe Report, type: :model do
       @report.save!
 
       @report2 = Report.new(subject: "sumeetjain", twitter_client: FakeTwitter.new, updated_at: Time.now - 24.hours)
-      @report2.save
+      @report2.save!
     end
 
     describe '#create' do
+      context "when subject is a private user" do
+        it "sets report as invalid and populates error message" do
+          report = Report.create(subject: "hul", twitter_client: FakeTwitter::Unauthorized.new)
+
+          error_text = I18n.t("twitter_errors.unauthorized")
+
+          expect(report.errors.messages).to include(:twitter)
+          expect(report.errors.messages[:twitter]).to include(error_text)
+        end
+
+        it "doesn't also show error re: number of friends" do
+          report = Report.create(subject: "hul", twitter_client: FakeTwitter::Unauthorized.new)
+
+          expect(report.errors.messages).to_not include(:friends_in_report_count)
+        end
+      end
+
+      context "when API rate limit is exceeded" do
+        it "sets report as invalid and populates error message" do
+          report = Report.create(subject: "hul", twitter_client: FakeTwitter::TooManyRequests.new)
+
+          error_text = I18n.t("twitter_errors.too_many_requests")
+
+          expect(report.errors.messages).to include(:twitter)
+          expect(report.errors.messages[:twitter]).to include(error_text)
+        end
+
+        it "doesn't also show error re: number of friends" do
+          report = Report.create(subject: "hul", twitter_client: FakeTwitter::TooManyRequests.new)
+
+          expect(report.errors.messages).to_not include(:friends_in_report_count)
+        end
+      end
+
+      context "when subject doesn't have enough friends" do
+        it "adds error to report" do
+          report = Report.create(subject: "hul", twitter_client: FakeTwitter::NoFriends.new)
+
+          expect(report.errors.messages).to include(:friends_in_report_count)
+        end
+      end
+
       it "sets friends_count" do
         expect(@report.friends_count).to eq(5)
       end
@@ -88,21 +130,21 @@ RSpec.describe Report, type: :model do
 		end
 	end
 
-  describe '.random' do
-    it "gets a random report" do
-      # Setup
-      Report.destroy_all
+  # describe '.random' do
+  #   it "gets a random report" do
+  #     # Setup
+  #     Report.destroy_all
 
-      Report.create(subject: "A", twitter_client: FakeTwitter.new)
-      Report.create(subject: "B", twitter_client: FakeTwitter.new)
-      Report.create(subject: "C", twitter_client: FakeTwitter.new)
+  #     reportA = Report.create(subject: "hul", twitter_client: FakeTwitter.new)
+  #     reportB = Report.create(subject: "hul", twitter_client: FakeTwitter.new)
+  #     reportC = Report.create(subject: "hul", twitter_client: FakeTwitter.new)
 
-      # Stub the actual randomizer with a hard-coded value, so I can predict
-      # the result of Report.random.
-      expect(Report).to receive(:random_offset) { 1 }
+  #     # Stub the actual randomizer with a hard-coded value, so I can predict
+  #     # the result of Report.random.
+  #     expect(Report).to receive(:random_offset) { 1 }
 
-      # Exercise/Verify
-      expect(Report.random.subject).to eq("B")
-    end
-  end
+  #     # Exercise/Verify
+  #     expect(Report.random).to eq(reportB)
+  #   end
+  # end
 end

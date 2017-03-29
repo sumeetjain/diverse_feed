@@ -20,4 +20,23 @@ class FakeTwitter
   def friends_count(subject)
     subject_friend_ids(subject).length
   end
+
+  class NoFriends < self
+    def friend_ids(subject)
+      attrs = {ids: [1, 2]}
+      OpenStruct.new(attrs: attrs)
+    end
+  end
+
+  class TooManyRequests
+    def method_missing(method, args)
+      raise Twitter::Error::TooManyRequests
+    end
+  end
+
+  class Unauthorized
+    def method_missing(method, args)
+      raise Twitter::Error::Unauthorized
+    end
+  end
 end
