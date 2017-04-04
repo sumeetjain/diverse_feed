@@ -2,7 +2,7 @@
 # directly from Rails. If you want to call a Twitter gem's method, wrap that
 # method's functionality here first; so you can call this service's method to
 # access the API however you need.
-
+#
 # To use TwitterService, you must provide an 'asker', which is any object that
 # contains attributes for 'twitter_key' and 'twitter_secret' (which are access
 # tokens for an individual Twitter user). One place where such tokens are
