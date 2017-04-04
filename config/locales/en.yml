@@ -24,3 +24,4 @@ en:
   twitter_errors:
     too_many_requests: "only allows for a handful of requests per user at a time. Please try again in ~10 minutes."
     unauthorized: "won't allow us to view whom this person follows, so we can't run their report."
+    not_enough_friends: "not enough friends to generate a report."

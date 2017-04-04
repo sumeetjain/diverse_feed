@@ -22,21 +22,14 @@ class Report < ActiveRecord::Base
   serialize :demographics, Hash
 
   validates :subject, presence: true
-  validates :friends_in_report_count,
-    numericality: {
-      greater_than: 2,
+  validates_with TwitterValidator
 
-      # object = person object being validated
-      # data = { model: "Person", attribute: "Username", value: <username> }
-      message: -> (object, data) do
-        "Only #{data[:value].to_i} of the accounts this person follows have provided demographic information to us. Unfortunately, that's not enough for us to build a meaningful report. Please try again some time in the future, when hopefully more of them will have participated in this project."
-      end
-    },
-    if: :fetched_friends
-
-  before_validation :fetch_friends
-  before_create :generate_report_details
   before_create :set_profile_photo
+
+  # Sets report details.
+  def generate_report_details
+    self.demographics = ReportGenerator.run(friend_user_ids)
+  end
 
   # Removes extraneous information from the username.
   #
@@ -58,9 +51,17 @@ class Report < ActiveRecord::Base
     where(subject: subject, updated_at: (Time.now - 12.hours)..Time.now).first
   end
 
-  private
+  # Returns Integer of how many of subject's friends are included in report.
+  def friends_in_report_count
+    @friends_in_report_count ||= friend_user_ids.length
+  end
 
-  attr_accessor :fetched_friends
+  # Returns Integer of how many friends subject has.
+  def friends_count
+    @friends_count ||= twitter_service.friends_count(subject)
+  end
+
+  private
 
   # Initializes TwitterService.
   def twitter_service
@@ -82,11 +83,6 @@ class Report < ActiveRecord::Base
     @friend_user_ids ||= User.convert_twitter_ids(friend_twitter_ids)
   end
 
-  # Sets report details.
-  def generate_report_details
-    self.demographics = ReportGenerator.run(friend_user_ids)
-  end
-
   def set_profile_photo
     self.profile_photo = @twitter_service.avatar(subject)
   end
@@ -94,19 +90,6 @@ class Report < ActiveRecord::Base
   # Returns a random Integer between 1 and the number of rows in 'reports'.
   def self.random_offset
     rand(count)
-  end
-
-  # Connects to Twitter and gets information about the subject's friends.
-  def fetch_friends
-    begin
-      self.friends_count           = twitter_service.friends_count(subject)
-      self.friends_in_report_count = friend_user_ids.length
-      self.fetched_friends = true
-    rescue Twitter::Error::TooManyRequests => error
-      errors.add(:twitter, I18n.t("twitter_errors.too_many_requests")) and :abort
-    rescue Twitter::Error::Unauthorized => error
-      errors.add(:twitter, I18n.t("twitter_errors.unauthorized")) and :abort
-    end
   end
 
 end

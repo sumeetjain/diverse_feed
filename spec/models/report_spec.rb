@@ -57,8 +57,7 @@ RSpec.describe Report, type: :model do
 
           error_text = I18n.t("twitter_errors.unauthorized")
 
-          expect(report.errors.messages).to include(:twitter)
-          expect(report.errors.messages[:twitter]).to include(error_text)
+          expect(report.errors.messages[:base]).to include(error_text)
         end
 
         it "doesn't also show error re: number of friends" do
@@ -74,8 +73,7 @@ RSpec.describe Report, type: :model do
 
           error_text = I18n.t("twitter_errors.too_many_requests")
 
-          expect(report.errors.messages).to include(:twitter)
-          expect(report.errors.messages[:twitter]).to include(error_text)
+          expect(report.errors.messages[:base]).to include(error_text)
         end
 
         it "doesn't also show error re: number of friends" do
@@ -89,7 +87,9 @@ RSpec.describe Report, type: :model do
         it "adds error to report" do
           report = Report.create(subject: "hul", twitter_client: FakeTwitter::NoFriends.new)
 
-          expect(report.errors.messages).to include(:friends_in_report_count)
+          error_text = I18n.t("twitter_errors.not_enough_friends")
+
+          expect(report.errors.messages[:base]).to include(error_text)
         end
       end
 
