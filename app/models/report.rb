@@ -2,16 +2,26 @@
 #
 # Table name: reports
 #
-#  id                      :integer          not null, primary key
-#  subject                 :string
+#  created_at              :datetime         not null
+#  demographics            :text
 #  friends_count           :integer
 #  friends_in_report_count :integer
-#  demographics            :text
-#  user_id                 :integer
-#  created_at              :datetime         not null
-#  updated_at              :datetime         not null
-#  twitter_id              :integer
+#  id                      :integer          not null, primary key
 #  profile_photo           :text
+#  subject                 :string
+#  twitter_id              :integer
+#  updated_at              :datetime         not null
+#  user_id                 :integer
+#
+# Indexes
+#
+#  index_reports_on_subject     (subject)
+#  index_reports_on_twitter_id  (twitter_id)
+#  index_reports_on_user_id     (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_c7699d537d  (user_id => users.id)
 #
 
 class Report < ActiveRecord::Base

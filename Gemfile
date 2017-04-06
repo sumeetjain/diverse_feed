@@ -17,8 +17,6 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
-# bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -45,6 +43,9 @@ group :development, :test do
 
   # Fixes a bug in Thor that causes a warning when running Rails CLI commands.
   gem "thor", "0.19.1"
+
+  gem 'yard'
+  gem 'yard-tomdoc'
 end
 
 group :development do

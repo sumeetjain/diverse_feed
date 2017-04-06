@@ -2,11 +2,11 @@
 #
 # Table name: users
 #
+#  created_at     :datetime         not null
 #  id             :integer          not null, primary key
 #  twitter_id     :string
 #  twitter_key    :text
 #  twitter_secret :text
-#  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
 

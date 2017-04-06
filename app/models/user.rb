@@ -2,18 +2,13 @@
 #
 # Table name: users
 #
+#  created_at     :datetime         not null
 #  id             :integer          not null, primary key
 #  twitter_id     :string
 #  twitter_key    :text
 #  twitter_secret :text
-#  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
-
-# To submit their own demographic information, a person must be a User. That
-# means they have authenticated with Twitter, and we have captured their ID,
-# access token, and access secret. There is no other personally identifying
-# information about people in our system (e.g. SSN, name, email, etc).
 
 class User < ActiveRecord::Base
   has_many :reports
@@ -49,7 +44,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :ethnicities, allow_destroy: true,
     reject_if: proc { |attrs| attrs['value'].blank? }
 
-  # Get our users' IDs from a set of Twitter IDs.
+  # Internal: Get our users' IDs from a set of Twitter IDs.
   #
   # Returns an ActiveRecord::Relation containing the users' IDs.
   scope :convert_twitter_ids, -> (ids) { select(:id).where(twitter_id: ids).pluck(:id) }
@@ -58,7 +53,7 @@ class User < ActiveRecord::Base
   #
   # auth_hash - Hash containing the Twitter OAuth response.
   #
-  # Returns a User.
+  # Returns User
   def self.find_or_create_from_twitter(auth_hash)
     find_by_twitter_id(auth_hash[:uid]) || create_from_twitter(auth_hash)
   end
@@ -70,14 +65,14 @@ class User < ActiveRecord::Base
     super || build_income
   end
 
-  # Seed year of birth, if needed.
+  # Public: Seed year of birth, if needed.
   def year_of_birth
     super || build_year_of_birth
   end
 
   private
 
-  # Create a new user from Twitter's OAuth flow.
+  # Internal: Create a new user from Twitter's OAuth flow.
   #
   # auth_hash - Hash containing the Twitter OAuth response.
   #

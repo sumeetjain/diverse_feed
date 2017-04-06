@@ -15,3 +15,6 @@
 # Ignore each dev's personal environment vars.
 .env.local
 /.idea
+
+# Ignore the auto-generated docs.
+doc/
