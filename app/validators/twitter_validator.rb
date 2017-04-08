@@ -2,11 +2,11 @@ class TwitterValidator < ActiveModel::Validator
   def validate(record)
     begin
       record.generate_report_details
-    rescue InsufficientData
+    rescue TwitterService::Error::InsufficientData
       record.errors.add(:base, I18n.t("twitter_errors.not_enough_friends")) and :abort
-    rescue Twitter::Error::Unauthorized => error
+    rescue TwitterService::Error::Unauthorized
       record.errors.add(:base, I18n.t("twitter_errors.unauthorized")) and :abort
-    rescue Twitter::Error::TooManyRequests => error
+    rescue TwitterService::Error::TooManyRequests
       record.errors.add(:base, I18n.t("twitter_errors.too_many_requests")) and :abort
     end
   end

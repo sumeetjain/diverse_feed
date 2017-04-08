@@ -17,36 +17,50 @@ class TwitterService
     @client = client || twitter_rest_client
   end
 
-  # Get the IDs of the accounts that someone follows.
-  #
-  # subject - String account name of who to look up.
-  #
-  # Returns Array of subject's friends' Twitter IDs.
-  def subject_friend_ids(subject)
-    client.friend_ids(subject).attrs[:ids]
+  def method_missing(m, *args)
+    Methods.new(@client).send(m, args)
   end
 
-  # Count how many friends someone has.
-  #
-  # subject - String account name of who to look up.
-  #
-  # Returns Integer.
-  def friends_count(subject)
-    subject_friend_ids(subject).length
-  end
+  class Methods
+    def initialize(client)
+      @client = client
+    end
 
-  # Get an account's Twitter ID.
-  #
-  # subject - String account name of who to look up.
-  #
-  # Returns the ID Integer.
-  def user_id(subject)
-    client.user(subject).id
-  end
+    # Get the IDs of the accounts that someone follows.
+    #
+    # subject - String account name of who to look up.
+    #
+    # Returns Array of subject's friends' Twitter IDs.
+    def subject_friend_ids(subject)
+      client.friend_ids(subject).attrs[:ids]
+    end
 
-  # Returns a given user's avatar photo URL String.
-  def avatar(username)
-    client.user(username).profile_image_url_https
+    # Count how many friends someone has.
+    #
+    # subject - String account name of who to look up.
+    #
+    # Returns Integer.
+    def friends_count(subject)
+      subject_friend_ids(subject).length
+    end
+
+    # Get an account's Twitter ID.
+    #
+    # subject - String account name of who to look up.
+    #
+    # Returns the ID Integer.
+    def user_id(subject)
+      client.user(subject).id
+    end
+
+    # Returns a given user's avatar photo URL String.
+    def avatar(username)
+      client.user(username).profile_image_url_https
+    end
+
+    private
+
+    attr_reader :client
   end
 
   private
